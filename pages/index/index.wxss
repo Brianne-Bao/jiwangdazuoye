@@ -1,0 +1,11 @@
+/**index.wxss**/
+.navi {
+    padding: 10px 10px;
+    color: #333;
+    width: 25%;
+}
+
+.navi_icon {
+    width: 81rpx;
+    height: 81rpx;
+}

@@ -1,0 +1,18 @@
+{
+    "pages": [
+        "pages/classTable/classTable",
+        "pages/allCourse/allCourse",
+        
+        "pages/login/login",
+        "pages/index/index",
+        "pages/classRoom/classRoom"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "Weixin",
+        "navigationBarTextStyle": "black"
+    },
+    "style": "v2",
+    "sitemapLocation": "sitemap.json"
+}
