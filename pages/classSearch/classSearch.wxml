@@ -1,2 +1,5 @@
 <!--pages/classSearch/classSearch.wxml-->
-<text>pages/classSearch/classSearch.wxml</text>
+<view class="page__bd">
+    <mp-searchbar bindselectresult="selectResult" search="{{search}}">
+    </mp-searchbar>
+</view>

@@ -1,8 +1,9 @@
 // pages/classTable/classTable.js
 Page({
     data: {
-        test: [1, 2, 3, 4],
-        courses:wx.getStorageSync('courses')
+        curr_week: 7, //今天是开学第几周
+        weekday: 3, //今天是星期几
+        courses: wx.getStorageSync('courses') //该学生的所有课程信息
     },
 
     getAllCourseId: function () {
@@ -43,17 +44,32 @@ Page({
             })
     },
 
+    cntCurrWeek: function () {
+        var termBeginData = new Date("2022-02-14"); //开学日期
+        var today = new Date();
+        var daysDiff = Math.ceil((today - termBeginData) / (1000 * 60 * 60 * 24));
+        var weekDiff = Math.ceil(daysDiff / 7);
+        this.setData({
+            "weekday":today.getDay(),
+            "curr_week":weekDiff
+        });
+    },
+
     onLoad: function (e) {
+        this.cntCurrWeek();
         this.getAllCourseId();
     },
+
+    lastWeek: function (e) {
+        this.setData({"curr_week":this.data.curr_week-1}); 
+    },
+    nextWeek: function (e) {
+        this.setData({"curr_week":this.data.curr_week+1});
+    },
+
     showCsInfo: function () {
 
     },
-    lastWeek: function (e) {},
-    nextWeek: function (e) {
-
-    },
-
     allCourse: function (e) {
         wx.navigateTo({
             url: "/pages/allCourse/allCourse"

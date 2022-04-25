@@ -32,14 +32,19 @@ page {
     height: 0;
 }
 
+button {
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
 
 /* 表格框架部分 */
 .top {
     display: flex;
     height: 50px;
     flex-direction: row;
-    background-color: #EFEFF4;
     color: #333;
+    background-color: #EFEFF4;
 }
 
 .top-text {

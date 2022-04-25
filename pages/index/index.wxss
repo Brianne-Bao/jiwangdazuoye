@@ -1,13 +1,12 @@
 /**index.wxss**/
 .navi {
+    display: flex;
+    justify-content:space-evenly; 
     /* padding: 10px 10px;
     color: #333;
     width: 25%; */
 }
-
 .navi_icon {
-    display: flex;
-    justify-content:center;
     width: 81rpx;
     height: 81rpx;
 }

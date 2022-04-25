@@ -1,0 +1,23 @@
+{
+  "name": "jiwangdazuoye",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brianne-Bao/jiwangdazuoye.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Brianne-Bao/jiwangdazuoye/issues"
+  },
+  "homepage": "https://github.com/Brianne-Bao/jiwangdazuoye#readme",
+  "dependencies": {
+    "miniprogram-sm-crypto": "^0.3.7"
+  }
+}

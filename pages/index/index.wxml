@@ -3,20 +3,18 @@
 
 
   <view class="navi">
-    <navigation-bar>
-      <navigator url="/pages/classTable/classTable" class="navi">
-        <image class="navi_icon" src="/images/mainPage/classTable.png" />
-        <view class="navi_label">课表查询</view>
+      <navigator url="/pages/classTable/classTable" >
+        <image class="navi_icon" src="/images/mainPage/classTable.png"/>
+        <view class="navi_label">我的课表</view>
       </navigator>
-      <navigator url="/pages/classRoom/classRoom" class="navi">
+      <navigator url="/pages/classRoom/classRoom" >
         <image class="navi_icon" src="/images/mainPage/classroom.png" />
-        <view class="navi_label">空闲教室</view>
+        <view class="navi_label">教室课表</view>
       </navigator>
-      <navigator url="/pages/classRoom/classSearch" class="navi">
+      <navigator url="/pages/classSearch/classSearch" >
         <image class="navi_icon" src="/images/mainPage/classroom.png" />
         <view class="navi_label">课程查询</view>
       </navigator>
 
-    </navigation-bar>
   </view>
 </view>
