@@ -1,11 +1,16 @@
 /**index.wxss**/
 .navi {
-    padding: 10px 10px;
+    /* padding: 10px 10px;
     color: #333;
-    width: 25%;
+    width: 25%; */
 }
 
 .navi_icon {
+    display: flex;
+    justify-content:center;
     width: 81rpx;
     height: 81rpx;
+}
+.navi_label{
+    font-size: 30rpx;
 }

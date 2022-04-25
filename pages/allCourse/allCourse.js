@@ -2,13 +2,10 @@
 Page({
 
     data: {
-
+        courses:wx.getStorageSync('courses')
     },
 
-    
-
     onLoad: function (options) {
-        all_course_id = wx.getStorageSync('all_course_id');
         
 
     },

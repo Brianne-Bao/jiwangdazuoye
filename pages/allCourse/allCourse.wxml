@@ -1,2 +1,23 @@
 <!--pages/allCourse/allCourse.wxml-->
-<text>pages/allCourse/allCourse.wxml</text>
+<view>
+    <navigator url="/pages/index/index">
+        <image class="icon" src="/icons/return.png"></image>
+    </navigator>
+    <navigator url="/pages/classTable/classTable">
+        <image class="icon" src="/icons/close.png"></image>
+    </navigator>
+    <view class="divLine"></view>
+</view>
+<view class="content">
+    <block wx:for="{{courses}}" wx:key="index" wx:for-item="course">
+        <text class="cs_id">{{course.cs_id}}\n</text>
+        <text class="cs_name">{{course.cs_name}}\n</text>
+        <text class="xiangmu">时间地点:</text>
+        <view wx:for="{{course.day}}" wx:key="index" wx:for-index="i" wx:for-item="day">
+            星期{{day}} 第{{course.section[i][0]}}-{{course.section[i][course.section[i].length-1]}}节 {{course.classroom[i]}}
+        </view>
+        <text>{{course.week_bg}}-{{course.week_end}}周\n</text>
+        <text class="xiangmu">授课教师：</text>{{course.tea_id}}
+        <view class="divLine"></view>
+    </block>
+</view>

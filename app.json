@@ -1,11 +1,12 @@
 {
     "pages": [
-        "pages/classTable/classTable",
-        "pages/allCourse/allCourse",
-        
-        "pages/login/login",
         "pages/index/index",
-        "pages/classRoom/classRoom"
+        "pages/allCourse/allCourse",
+        "pages/classTable/classTable",
+        "pages/login/login",
+        
+        "pages/classRoom/classRoom",
+        "pages/classSearch/classSearch"
     ],
     "window": {
         "backgroundTextStyle": "light",

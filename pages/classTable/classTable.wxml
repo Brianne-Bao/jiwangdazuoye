@@ -9,7 +9,6 @@
                 <image style=' height: 100rpx;width: 100rpx;' src='/images/classTable/allcourse.jpg' bindtap="allCourse"></image>
     </view>
 
-
     <!-- 表格框架部分  -->
     <view class="top">
         <view class='left'>节\周</view>
@@ -29,27 +28,24 @@
                 </view>
             </view>
             <!--课表主体部分-->
-            
-            <view wx:for="{{courses}}" wx:key="index" wx:for-item="course">
-                <block wx:if="{{curr_week>=week_bg && curr_week<=week_end }}">
-                    <view wx:for="{{courses.day}}" wx:key="index" wx:for-index="i" wx:for-item="day"></view>
-                    <view class="flex-item kcb-item" bindtap="showCsInfo" style="margin-left:{{(day-1)*98}}rpx;
-                    margin-top:{{(course.day[0]-1)*50+2}}px;
-                    height:{{course.day.length*50-5}}px;
-                    background-color:{{course.type == '0'?'#FCB8AF':(course.type == '1'?'#81D2FC':'#F8C77A')}}">
-                        <view class="smalltext" style='-webkit-line-clamp: {{course.day.length == 3?"4":(course.day.length == 4?"6":"2")}}'>
+            <block wx:for="{{courses}}" wx:key="index" wx:for-item="course">
+                <!-- <block wx:if="{{curr_week>=week_bg && curr_week<=week_end }}"> -->
+                <block wx:for="{{course.day}}" wx:key="index" wx:for-index="i" wx:for-item="day">
+
+                    <view class="flex-item kcb-item" bindtap="showCsInfo" style="margin-left:{{day*98}}rpx;     margin-top:{{(course.section[i][0]-1)*50+2}}px;    height:{{course.section[i].length*50-5}}px;    background-color:{{course.type == '0'?'#FCB8AF':(course.type == '1'?'#81D2FC':'#F8C77A')}}">
+
+                        <view class="smalltext" style='-webkit-line-clamp: {{course.section[i].length == 3?"4":(course.section[i].length == 4?"6":"2")}}'>
                             {{course.cs_name}}
                         </view>
-                        <view class='classRoom'>
-                            ({{course.classroom == ''?'--':course.classroom}})
+                        <view class='classRoom'>{{course.classroom[i] == ''?'--':course.classroom[i]}} </view>
+                        <view class='logo' style="background-color:{{course.type == 0 ?'#FA7666':(course.type==1 ?'#3CB9FB':'#F39C13')}}">
+                            {{course.type == 0?'必':(course.type == 1?'选':'其')}}
                         </view>
-                        <view class='logo' style="background-color:{{course.type == " 0"?'#FA7666':(course.type=="1" ?'#3CB9FB':'#F39C13')}}">
-                            {{course.type == "0"?'必':(course.type == "1"?'选':'其')}}
-                        </view>
-                        <!-- day代表星期几上课，sksj是上课时间，skcd上课长度，cs_name课程名，jsbh教室编号 -->
+                    </view>
                 </block>
-            </view>
+                <!-- </block> -->
+            </block>
         </view>
-</view>
-</scroll-view>
+    </scroll-view>
+
 </view>
