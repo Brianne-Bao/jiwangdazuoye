@@ -46,7 +46,6 @@ Page({
             wx.cloud.database().collection('login')
                 .get({
                     success: (res) => {
-    
                         let admin = res.data;
                         var inputUserName = this.data.username;
                         var inputPassword = this.data.password;

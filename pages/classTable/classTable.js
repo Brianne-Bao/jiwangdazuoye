@@ -1,6 +1,19 @@
 // pages/classTable/classTable.js
 Page({
     data: {
+        courses:[],
+        // [{
+        //     "cs_id": "000000041",
+        //     "cs_name": "中国近现代史纲要",
+        //     "week_bg": 1,
+        //     "week_end": 17,
+        //     "day": [3],
+        //     "oddEvenWeek": [0],
+        //     "section": [[9, 10, 11]],
+        //     "classroom": ["逸B-313"],
+        //     "type": 0,
+        //     "tea_id": ["0000001"]
+        //   }]
         wlist: [{
                 "xqj": 1,
                 "skjc": 1,
@@ -98,6 +111,51 @@ Page({
                 "color": 0
             },
         ]
+    },
+
+    getAllCourseId: function () {
+        if (!wx.getStorageSync('currentUser')) { //未登录，跳转到登录页面
+            wx.navigateTo({
+                url: '/pages/login/login',
+            })
+        }
+        wx.cloud.database().collection('student')
+            .where({
+                stu_id: wx.getStorageSync('currentUser')
+            })
+            .get({
+                success: (res) => {
+                    var all_course_id = res.data[0].cs_ids; //当前学生用户的所有课程号
+                    console.log(all_course_id);
+                    all_course_id.forEach(cs_id => {
+                        this.getCourseData(cs_id);
+                    });
+                    wx.setStorageSync('courses', this.data.courses);
+                }
+            })
+    },
+
+    getCourseData: function (course_id) {
+        wx.cloud.database().collection('course')
+            .where({
+                cs_id: course_id
+            })
+            .get({
+                success: (res) => {
+                    var cs_info = res.data[0];
+                    if(!cs_info){
+                        console.log("未找到该课程数据");
+                    }
+                    this.data.courses.push(cs_info);
+                }
+            })
+    },
+
+    onLoad: function (e) {
+        this.getAllCourseId();
+    },
+    showCsInfo: function(){
+
     },
     lastWeek: function (e) {
 

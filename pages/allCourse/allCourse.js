@@ -5,12 +5,12 @@ Page({
 
     },
 
-    onLoad: function (options) {
-        wx.cloud.database().collection('student').get({
-            success: (res) => {
+    
 
-            }
-        })
+    onLoad: function (options) {
+        all_course_id = wx.getStorageSync('all_course_id');
+        
+
     },
 
 
