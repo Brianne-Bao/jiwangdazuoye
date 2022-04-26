@@ -1,5 +1,43 @@
 <!--pages/classSearch/classSearch.wxml-->
-<view class="page__bd">
-    <mp-searchbar bindselectresult="selectResult" search="{{search}}">
-    </mp-searchbar>
+<view class="search-tab">
+    <!-- <mp-searchbar bindselectresult="selectResult" search="{{search}}"></mp-searchbar> -->
+    <input placeholder="请输入课程名/课程号" placeholder-class="search_text" bindblur="get_cs_idName"></input>
+    <input placeholder="请输入教师姓名" placeholder-class="search_text" bindblur="get_tea_name"></input>
+    <!-- 院系选择框 -->
+    <view class="selectBox" bindtap="select_department">
+        <text class="search_text">{{department==''?'请选择上课院系':department}}</text>
+        <image src="/icons/sanjiao.png" class="sanjiao" style="{{isSelect[0]?'':'transform:rotateZ(180deg)'}}" />
+        <view class="select" style="{{isSelect[0]? 'height:'+54*departments.length+'rpx;' : 'border:0'}}">
+            <view class="choices" catchtap="get_department" wx:for="{{departments}}" data-department="{{item}}" wx:key="department">
+                {{item}}
+            </view>
+        </view>
+    </view>
+    <!-- 专业选择框( bug:下拉框的元素存在，但是不显示 ) -->
+    <view class="selectBox" bindtap="select_major">
+        <text class="search_text">{{major==''?'上课专业':major}}</text>
+        <image src="/icons/sanjiao.png" class="sanjiao" style="{{isSelect[1]?'':'transform:rotateZ(180deg)'}}" />
+        <block wx:if="isSelect[0]">
+            <view class="select" style="{{isSelect[1]?'height:'+54*majors.length+'rpx;':'border:0'}}">
+                <view class="choices" catchtap="get_major" wx:for="{{majors[department]}}" data-major="{{item}}" wx:key="major">
+                    {{item}}
+                </view>
+            </view>
+        </block>
+    </view>
+
+    <!-- 年级选择框 -->
+    <view class="selectBox" bindtap="select_grade">
+        <text class="search_text">{{grade==''?'上课年级':grade}}</text>
+        <image src="/icons/sanjiao.png" class="sanjiao" style="{{isSelect[2]?'':'transform:rotateZ(180deg)'}}" />
+        <view class="select" style="{{isSelect[2]? 'height:'+54*grades.length+'rpx;' : 'border:0'}}">
+            <view class="choices" catchtap="get_grade" wx:for="{{grades}}" data-grade="{{item}}" wx:key="grade">
+                {{item}}
+            </view>
+        </view>
+    </view>
+
+    <button class="searchBtn" bindtap="search">查询</button>
+
+
 </view>

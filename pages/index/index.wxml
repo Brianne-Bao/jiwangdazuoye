@@ -1,20 +1,17 @@
 <!--index.wxml-->
 <view>
-
-
   <view class="navi">
-      <navigator url="/pages/classTable/classTable" >
-        <image class="navi_icon" src="/images/mainPage/classTable.png"/>
-        <view class="navi_label">我的课表</view>
-      </navigator>
-      <navigator url="/pages/classRoom/classRoom" >
-        <image class="navi_icon" src="/images/mainPage/classroom.png" />
-        <view class="navi_label">教室课表</view>
-      </navigator>
-      <navigator url="/pages/classSearch/classSearch" >
-        <image class="navi_icon" src="/images/mainPage/classroom.png" />
-        <view class="navi_label">课程查询</view>
-      </navigator>
-
+    <navigator url="/pages/classTable/classTable">
+      <image class="navi_icon" src="/images/mainPage/classTable.png" />
+      <view class="navi_label">我的课表</view>
+    </navigator>
+    <navigator url="/pages/classRoom/classRoom">
+      <image class="navi_icon" src="/images/mainPage/classroom.png" />
+      <view class="navi_label">教室课表</view>
+    </navigator>
+    <navigator url="/pages/classSearch/classSearch">
+      <image class="navi_icon" src="/images/mainPage/classroom.png" />
+      <view class="navi_label">课程查询</view>
+    </navigator>
   </view>
 </view>

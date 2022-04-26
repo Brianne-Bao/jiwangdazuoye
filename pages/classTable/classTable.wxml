@@ -3,7 +3,7 @@
     <!-- 选择周数部分 -->
     <view class='title'>
         <button size="mini" bindtap="lastWeek">{{'<'}} 上一周 </button>
-                <text style="">第{{curr_week}}周</text>
+                <text >第{{curr_week}}周</text>
                 <button size="mini" bindtap="nextWeek">下一周 {{'>'}} </button>
                 <image style=' height: 100rpx;width: 100rpx;' src='/images/classTable/allcourse.jpg' bindtap="allCourse"></image>
     </view>

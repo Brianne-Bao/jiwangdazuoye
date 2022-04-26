@@ -1,12 +1,14 @@
 {
     "pages": [
         "pages/index/index",
+        "pages/classSearch/classSearch",
+        
+        "pages/login/login",
+
         "pages/allCourse/allCourse",
         "pages/classTable/classTable",
-        "pages/login/login",
+        "pages/classRoom/classRoom"
         
-        "pages/classRoom/classRoom",
-        "pages/classSearch/classSearch"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -16,5 +18,22 @@
     },
     "style": "v2",
     "sitemapLocation": "sitemap.json",
-    "useExtendedLib": { "weui": true }
+    "useExtendedLib": {
+        "weui": true
+    },
+    "tabBar": {
+        "list": [{
+                "pagePath": "pages/index/index",
+                "iconPath": "icons/icon_component.png",
+                "selectedIconPath": "icons/icon_component_HL.png",
+                "text": "主页"
+            },
+            {
+                "pagePath": "pages/login/login",
+                "iconPath": "icons/icon_API.png",
+                "selectedIconPath": "icons/icon_API_HL.png",
+                "text": "个人信息"
+            }
+        ]
+    }
 }

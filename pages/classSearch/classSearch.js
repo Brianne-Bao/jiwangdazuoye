@@ -1,66 +1,89 @@
 // pages/classSearch/classSearch.js
 Page({
-
-    /**
-     * 页面的初始数据
-     */
     data: {
-
+        isSelect: [false, false, false], //三个下拉框有没有被选择
+        departments: ['历史学院', '法学院'], //院系
+        majors: {
+            '历史学院': ['历史学类', '历史学', '考古学'],
+            '法学院': ['法学类', '法学']
+        }, //专业
+        grades: ['2018', '2019', '2020', '2021'], //年级
+        //当前输入/选中的
+        cs_idName: "",
+        tea_name: "",
+        department: "",
+        major: "",
+        grade: "",
+        //符合筛选条件的课程信息
+        sx_courses:[]
     },
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-
+    get_cs_idName: function (e) {
+        this.setData({
+            "cs_idName": e.detail.value
+        })
+    },
+    get_tea_name: function (e) {
+        this.setData({
+            "tea_idName": e.detail.value
+        })
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
+    select_department: function () {
+        this.setData({
+            "isSelect[0]": !this.data.isSelect[0]
+        })
+    },
+    get_department: function (e) {
+        console.log(e);
+        let value = e.currentTarget.dataset.department;
+        this.setData({
+            "department": value,
+            "isSelect[0]": false,
+        })
+        console.log(this.data.majors['历史学院']);
     },
 
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
+    select_major: function () {
+        this.setData({
+            "isSelect[1]": !this.data.isSelect[1]
+        })
+    },
+    get_major: function (e) {
+        let value = e.currentTarget.dataset.major;
+        this.setData({
+            "major": value,
+            "isSelect[1]": false,
+        })
     },
 
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
+    select_grade: function () {
+        this.setData({
+            "isSelect[2]": !this.data.isSelect[2]
+        })
+    },
+    get_grade: function (e) {
+        let value = e.currentTarget.dataset.grade
+        this.setData({
+            "grade": value,
+            "isSelect[2]": false,
+        })
     },
 
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
+    search: function () {
+        var course_db = wx.cloud.database().collection('course');
+        course_db
+            .where({
+                cs_id: course_id
+            })
+            .get({
+                success: (res) => {
+                    var cs_info = res.data[0];
+                    if (!cs_info) {
+                        console.log("未找到该课程数据");
+                    }
+                    this.data.sx_courses.push(cs_info);
+                }
+            })
     }
 })
