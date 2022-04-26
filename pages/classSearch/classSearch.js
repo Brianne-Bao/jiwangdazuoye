@@ -15,7 +15,7 @@ Page({
         major: "",
         grade: "",
         //符合筛选条件的课程信息
-        sx_courses:[]
+        sx_courses: []
     },
 
     get_cs_idName: function (e) {
@@ -71,19 +71,26 @@ Page({
     },
 
     search: function () {
-        var course_db = wx.cloud.database().collection('course');
-        course_db
+        console.log(this.data.cs_idName);
+        var db = wx.cloud.database();
+        const _ = db.command;
+        db.collection('course')
+            .where(_.or([
+                    {cs_id: {$regex: '.*' + this.data.cs_idName}},
+                    {cs_name: {$regex: '.*' + this.data.cs_idName}}
+            ]))
             .where({
-                cs_id: course_id
+                // tea_name: {$regex: '.*' + this.data.tea_name,},  
+                // major: {$regex: '.*' + this.data.major,},
+                // grade: { $regex: '.*' + this.data.grade,},
             })
-            .get({
-                success: (res) => {
-                    var cs_info = res.data[0];
-                    if (!cs_info) {
-                        console.log("未找到该课程数据");
-                    }
-                    this.data.sx_courses.push(cs_info);
-                }
+            .get().then(res => {
+                console.log(res.data);
+                this.setData({
+                    "sx_courses": res.data
+                })
             })
+
+
     }
 })

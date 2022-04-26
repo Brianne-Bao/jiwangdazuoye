@@ -36,8 +36,23 @@
             </view>
         </view>
     </view>
-
+    <!--"查询"按钮  -->
     <button class="searchBtn" bindtap="search">查询</button>
+</view>
 
-
+<!-- 显示筛选结果部分 -->
+<text class="xiangmu">下列为查询结果</text>
+<view class="divLine"></view>
+<view class="show_data_tab">
+    <block wx:for="{{sx_courses}}" wx:key="index" wx:for-item="course">
+        <text class="cs_id">{{course.cs_id}}\n</text>
+        <text class="cs_name">{{course.cs_name}}\n</text>
+        <text class="xiangmu">时间地点:</text>
+        <view wx:for="{{course.day}}" wx:key="index" wx:for-index="i" wx:for-item="day">
+            星期{{day}} 第{{course.section[i][0]}}-{{course.section[i][course.section[i].length-1]}}节 {{course.classroom[i]}}
+        </view>
+        <text>{{course.week_bg}}-{{course.week_end}}周\n</text>
+        <text class="xiangmu">授课教师：</text>{{course.tea_id}}
+        <view class="divLine"></view>
+    </block>
 </view>

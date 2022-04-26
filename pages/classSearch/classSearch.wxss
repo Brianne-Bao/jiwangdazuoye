@@ -7,7 +7,7 @@
 }
 
 .search_text {
-    font-size: 30rpx;
+    /* font-size: 30rpx; */
     letter-spacing: 2rpx;
     color: slategray;
 }
@@ -19,6 +19,7 @@ input,
     justify-content: center;
     height: 25px;
     width: 500rpx;
+    font-size: 70%;
     margin: 7px;
     border: transparent;
     border-radius: 10rpx;
@@ -62,7 +63,36 @@ input,
     border: 0;
 }
 
+/* 查询按钮 */
 .searchBtn {
     margin-top: 7px;
+    margin-bottom: 20rpx;
     border-radius: 10px;
+}
+
+/* 显示筛选结果部分 */
+.show_data_tab {
+    font-size: 30rpx;
+    line-height: 1.5;
+}
+
+.cs_id {
+    color: #ff0000;
+    line-height: 2;
+}
+
+.cs_name {
+    font-weight: bold;
+    line-height: 2;
+}
+.xiangmu{
+    color:dimgray;
+    margin-top: 20rpx;
+}
+.divLine {
+    background: #E0E3DA;
+    width: 100%;
+    height: 3rpx;
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
 }

@@ -44,6 +44,10 @@
 
 **tea_id**(array)
 
+**major_id**
+
+**grade**
+
 ```
 {
   "cs_id": "000000041",

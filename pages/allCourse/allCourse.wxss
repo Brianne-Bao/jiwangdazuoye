@@ -3,11 +3,7 @@
     font-size: 30rpx;
     line-height: 1.5;
 }
-.icon{
-    display: inline;
-    height: 80rpx;
-    width: 80rpx;
-}
+
 .cs_id {
     color: #ff0000;
     line-height: 2;
