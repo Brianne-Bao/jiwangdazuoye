@@ -67,8 +67,10 @@ Page({
                                         icon: 'success',
                                         duration: 2500
                                     })
-                                    wx.setStorageSync('currentUser', inputUserName);
-                                    wx.navigateTo({
+                                    var app = getApp();
+                                    app.globalData.username = inputUserName;
+                                    app.globalData.usertype = admin[i].type;
+                                    wx.switchTab({
                                         url: '/pages/index/index',
                                     })
                                     break;

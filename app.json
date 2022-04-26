@@ -1,14 +1,15 @@
 {
     "pages": [
+
         "pages/index/index",
         "pages/classSearch/classSearch",
-  
+        "pages/changeCourse/changeCourse",
         "pages/login/login",
-
+        "pages/personInfo/personInfo",
         "pages/allCourse/allCourse",
         "pages/classTable/classTable",
         "pages/classRoom/classRoom"
-        
+
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -29,7 +30,7 @@
                 "text": "主页"
             },
             {
-                "pagePath": "pages/login/login",
+                "pagePath": "pages/personInfo/personInfo",
                 "iconPath": "icons/icon_API.png",
                 "selectedIconPath": "icons/icon_API_HL.png",
                 "text": "个人信息"

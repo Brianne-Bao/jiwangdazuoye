@@ -1,0 +1,38 @@
+<!--pages/personInfo/personInfo.wxml-->
+<view class="userinfo">
+    <view wx:if="{{username ==''}}">
+        <image bindtap="login" class="user-image" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <view class="user-nickname">请先
+            <text bindtap="login" style="color:green;text-decoration:underline">登录</text>
+        </view>
+    </view>
+    <view wx:else>
+        <image bindtap="login" class="user-image" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <text class="user-nickname">{{username}}</text>
+    </view>
+</view>
+
+<view>
+    <view class="hr"></view>
+    <view class='item'>
+        <view class="title">账号设置</view>
+        <view class="detail2">
+            <text>></text>
+        </view>
+    </view>
+    <view class="line"></view>
+
+    <view class='item'>
+        <view class="title">个人资料</view>
+        <view class="detail2">
+            <text> ></text>
+        </view>
+    </view>
+
+
+    <view class="line"></view>
+    <view class="logout" bindtap="logout">
+        <view >退出当前账号</view>
+    </view>
+    <view class="hr"></view>
+</view>

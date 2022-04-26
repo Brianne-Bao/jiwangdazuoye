@@ -3,11 +3,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
 }
 
 .search_text {
-    /* font-size: 30rpx; */
     letter-spacing: 2rpx;
     color: slategray;
 }

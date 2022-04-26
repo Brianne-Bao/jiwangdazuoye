@@ -7,11 +7,15 @@
     </navigator>
     <navigator url="/pages/classRoom/classRoom">
       <image class="navi_icon" src="/images/mainPage/classroom.png" />
-      <view class="navi_label">教室课表</view>
+      <view class="navi_label">教室查询</view>
     </navigator>
     <navigator url="/pages/classSearch/classSearch">
       <image class="navi_icon" src="/images/mainPage/classroom.png" />
-      <view class="navi_label">课程查询</view>
+      <view class="navi_label">本学期课程查询</view>
+    </navigator>
+    <navigator url="/pages/changeCourse/changeCourse">
+      <image class="navi_icon" src="/images/mainPage/classroom.png" />
+      <view class="navi_label">课程信息修改</view>
     </navigator>
   </view>
 </view>

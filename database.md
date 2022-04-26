@@ -2,6 +2,8 @@
 
 **username**（即学工号）
 
+**type**(0为学生，1为老师)
+
 **password**
 
 # student
