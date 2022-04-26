@@ -4,6 +4,7 @@
     line-height: 1.5;
 }
 .icon{
+    display: inline;
     height: 80rpx;
     width: 80rpx;
 }

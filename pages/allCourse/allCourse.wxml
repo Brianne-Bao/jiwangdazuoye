@@ -1,11 +1,11 @@
 <!--pages/allCourse/allCourse.wxml-->
 <view>
-    <navigator url="/pages/index/index">
+    <!-- <navigator url="/pages/index/index">
         <image class="icon" src="/icons/return.png"></image>
     </navigator>
     <navigator url="/pages/classTable/classTable">
         <image class="icon" src="/icons/close.png"></image>
-    </navigator>
+    </navigator> -->
     <view class="divLine"></view>
 </view>
 <view class="content">
