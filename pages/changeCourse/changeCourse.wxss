@@ -12,7 +12,12 @@
     text-align: center;
     font-size: 70%;
 }
-
+.icon{
+  /* display: inline-block; */
+    height: 70%;
+    width: 70%;
+    overflow: hidden;
+}
 /* 操作显示界面部分 */
 .signContainer {
     width: 100%;
@@ -89,3 +94,8 @@ input,
 .select :first-child {
     border: 0;
 }
+
+
+.myBtn {
+
+} 

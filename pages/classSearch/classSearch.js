@@ -15,7 +15,7 @@ Page({
         major: "",
         grade: "",
         //符合筛选条件的课程信息
-        sx_courses: []
+        sx_courses: [],
     },
 
     get_cs_idName: function (e) {
@@ -90,7 +90,6 @@ Page({
                     "sx_courses": res.data
                 })
             })
-
 
     }
 })

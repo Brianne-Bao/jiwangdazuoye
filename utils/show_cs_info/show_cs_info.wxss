@@ -1,0 +1,25 @@
+.show_data_tab {
+    font-size: 30rpx;
+    line-height: 1.5;
+}
+
+.cs_id {
+    color: #ff0000;
+    line-height: 2;
+}
+
+.cs_name {
+    font-weight: bold;
+    line-height: 2;
+}
+.xiangmu{
+    color:dimgray;
+    margin-top: 20rpx;
+}
+.divLine {
+    background: #E0E3DA;
+    width: 100%;
+    height: 3rpx;
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
+}

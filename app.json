@@ -1,13 +1,14 @@
 {
     "pages": [
-         "pages/changeCourse/changeCourse",
-        "pages/tmp/tmp",
+        "pages/classSearch/classSearch",
+        "pages/changeCourse/changeCourse",
         "pages/index/index",
+         
+         
+        
+        "pages/tmp/tmp",
        
         
-
-        
-        "pages/classSearch/classSearch",
         
         "pages/login/login",
         "pages/personInfo/personInfo",
