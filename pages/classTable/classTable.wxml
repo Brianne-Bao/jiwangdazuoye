@@ -3,7 +3,7 @@
     <!-- 选择周数部分 -->
     <view class='title'>
         <button size="mini" bindtap="lastWeek">{{'<'}} 上一周 </button>
-                <text >第{{curr_week}}周</text>
+                <text>第{{curr_week}}周</text>
                 <button size="mini" bindtap="nextWeek">下一周 {{'>'}} </button>
                 <image style=' height: 100rpx;width: 100rpx;' src='/images/classTable/allcourse.jpg' bindtap="allCourse"></image>
     </view>
@@ -32,13 +32,13 @@
                 <block wx:if="{{curr_week>=course.week_bg && curr_week<=course.week_end }}">
                     <block wx:for="{{course.day}}" wx:key="index" wx:for-index="i" wx:for-item="day">
                         <block wx:if="{{course.oddEvenWeek[i]==0 || (course.oddEvenWeek[i]==1 && curr_week%2==1) || (course.oddEvenWeek[i]==2 && curr_week%2==0)}}">
-                            <view class="flex-item kcb-item" bindtap="showCsInfo" style="margin-left:{{day*98}}rpx;     margin-top:{{(course.section[i][0]-1)*50+2}}px;    height:{{course.section[i].length*50-5}}px;    background-color:{{course.type == '0'?'#FCB8AF':(course.type == '1'?'#81D2FC':'#F8C77A')}}">
+                            <view class="flex-item kcb-item" bindtap="showCsInfo" style="margin-left:{{day*98}}rpx; margin-top:{{(course.section[i][0]-1)*50+2}}px;height:{{course.section[i].length*50-5}}px; background-color: {{course.type == 0?'#FCB8AF':(course.type == 1?'#F8C77A':(course.type==2?'#81D2FC':(couse.type==3?'#78fa78':'#f694fa')))}}; ">
                                 <view class="smalltext" style='-webkit-line-clamp: {{course.section[i].length == 3?"4":(course.section[i].length == 4?"6":"2")}}'>
                                     {{course.cs_name}}
                                 </view>
                                 <view class='classRoom'>{{course.classroom[i] == ''?'--':course.classroom[i]}} </view>
-                                <view class='logo' style="background-color:{{course.type == 0 ?'#FA7666':(course.type==1 ?'#3CB9FB':'#F39C13')}}">
-                                    {{course.type == 0?'必':(course.type == 1?'选':'其')}}
+                                <view class='logo' style="background-color:{{course.type == 0?'#FA7666':(course.type == 1?'#F39C13':(course.type==2?'#56c7ff':(couse.type==3?'#41f541':'#f151f7')))}}">
+                                    {{course.type == 0?'通':(course.type == 1?'平':(course.type==2?'选':(couse.type==3?'核':'选')))}}
                                 </view>
                             </view>
                         </block>

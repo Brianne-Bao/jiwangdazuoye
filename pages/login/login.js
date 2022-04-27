@@ -8,13 +8,6 @@ Page({
         password: ''
     },
 
-    //事件处理函数
-    bindViewTap: function () {
-        wx.navigateTo({
-            url: '../logs/logs'
-        })
-    },
-
     // 获取输入账号 
     usernameInput: function (e) {
         this.setData({

@@ -1,0 +1,39 @@
+/* pages/tmp/tmp.wxss */
+/* 班级信息 */
+.signContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    margin-bottom: 20rpx;
+  }
+  .infoItem {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    padding: 30rpx 10rpx 30rpx 10rpx;
+    border-bottom: 1rpx solid rgb(240, 240, 240);
+  }
+  .item-label {
+    width: 30%;
+    color: var(--themeColor);
+  }
+  .item-nav {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  
+  /* 修改按钮 */
+  .personBtn {
+    width:100%;
+    margin-top: 50rpx;
+    /* position: absolute; */
+    /* bottom: 0; */
+    color: white;
+    background-color:var(--themeColor);
+  }
+  

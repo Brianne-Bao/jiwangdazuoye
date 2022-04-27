@@ -1,0 +1,128 @@
+<!--pages/tmp/tmp.wxml-->
+<form bindsubmit="formSubmit" bindreset="formReset">
+
+<!-- 报名表单 开发 -->
+<view class="signContainer">
+  <view class="infoItem">
+    <text class="item-label">姓名</text>
+    <input name='userName' placeholder="未填写(必填)" value="{{getUserName}}"></input>
+  </view>
+  <view class="infoItem">
+    <text class="item-label">性别</text>
+    <view class="item-nav">
+      <picker name="userGender" bindchange="bindUserGenderChange" value="{{userGenderArray[genderIndex]}}" range="{{userGenderArray}}">{{userGenderArray[genderIndex]}}</picker>
+      <image mode="widthFix" style="width:30rpx;" src="/image/shot.png"></image>
+    </view>
+  </view>
+  <view class="infoItem">
+    <text class="item-label">籍贯</text>
+    <view class="item-nav">
+      <picker mode="region" name="userRegion" bindchange="bindUserRegionChange" value="{{getUserRegion}}">{{getUserRegion[0]}} {{getUserRegion[1]}} {{getUserRegion[2]}}</picker>
+      <image mode="widthFix" style="width:30rpx;" src="/image/shot.png"></image>
+    </view>
+  </view>
+  <view class="infoItem">
+    <text class="item-label">民族</text>
+    <input name='userPeople' placeholder="未填写(必填)" value="{{getUserPeople}}"></input>
+  </view>
+  <view class="infoItem">
+    <text class="item-label">**面貌</text>
+    <view class="item-nav">
+      <picker name="userPoliticalOutlook" bindchange="bindUserPoliticalOutlook" value="{{userPoliticalOutlook[politicalOutlookIndex]}}" range="{{userPoliticalOutlook}}">{{userPoliticalOutlook[politicalOutlookIndex]}}</picker>
+      <image mode="widthFix" style="width:30rpx;" src="/image/shot.png"></image>
+    </view>
+  </view>
+</view>
+<!-- 报名表单 结束 -->
+
+<!--  -->
+<view class="signContainer">
+  <view class="infoItem">
+    <text class="item-label">学号</text>
+    <input name='userID' placeholder="未填写(必填)" value="{{getUserID}}"></input>
+  </view>
+  <view class="infoItem">
+    <text class="item-label">班级</text>
+    <view class="item-nav">
+      <picker name="userClass" bindchange="bindUserClass" value="{{userClass[userClassIndex]}}" range="{{userClass}}">{{userClass[userClassIndex]}}</picker>
+      <image mode="widthFix" style="width:30rpx;" src="/image/shot.png"></image>
+    </view>
+  </view>
+  <view class="infoItem">
+    <text class="item-label">寝室号</text>
+    <input name='userRoomNumber' placeholder="未填写(1#101)" value="{{getUserRoomNumber}}"></input>
+  </view>
+</view>
+<!--  -->
+
+<!-- 联系方式 开始 -->
+<view class="signContainer">
+  <view class="infoItem">
+    <text class="item-label">手机</text>
+    <input name='userPhone' placeholder="未填写(必填)" value="{{getUserPhone}}"></input>
+  </view>
+  <view class="infoItem">
+    <text class="item-label">微信</text>
+    <input name='userWeChat' placeholder="未填写(选填)" value="{{getUserWeChat}}"></input>
+  </view>
+  <view class="infoItem">
+    <text class="item-label">QQ</text>
+    <input name='userQQ' placeholder="未填写(必填)" value="{{getUserQQ}}"></input>
+  </view>
+</view>
+<!-- 联系方式 结束 -->
+
+<!-- 部门意愿 开始 -->
+<view class="signContainer">
+  <view class="infoItem">
+    <text class="item-label">第一志愿</text>
+    <view class="item-nav">
+      <picker name="userFirstIntention" bindchange="bindUserFirstIntention" value="{{userFirstIntention[userFirstIntentionIndex]}}" range="{{userFirstIntention}}">{{userFirstIntention[userFirstIntentionIndex]}}</picker>
+      <image mode="widthFix" style="width:30rpx;" src="/image/shot.png"></image>
+    </view>
+  </view>
+  <view class="infoItem">
+    <text class="item-label">第二志愿</text>
+    <view class="item-nav">
+      <picker name="userSecondIntention" bindchange="bindUserSecondIntention" value="{{userSecondIntention[userSecondIntentionIndex]}}" range="{{userSecondIntention}}">{{userSecondIntention[userSecondIntentionIndex]}}</picker>
+      <image mode="widthFix" style="width:30rpx;" src="/image/shot.png"></image>
+    </view>
+  </view>
+  <view class="infoItem">
+    <text class="item-label">是否调剂</text>
+    <view class="item-nav">
+      <picker name="userAdjust" bindchange="bindUserAdjust" value="{{userAdjustArray[adjustIndex]}}" range="{{userAdjustArray}}">{{userAdjustArray[adjustIndex]}}</picker>
+      <image mode="widthFix" style="width:30rpx;" src="/image/shot.png"></image>
+    </view>
+  </view>
+</view>
+<!-- 部门意愿 结束 -->
+
+
+<!-- 获奖情况 开始 -->
+<view class="signContainer">
+  <view class="infoItem">
+    <text class="item-label">获奖情况</text>
+    <view class="item-nav">
+      <textarea maxlength="-1" name='userAward' placeholder="请写下你的获奖情况"></textarea>
+    </view>
+  </view>
+</view>
+<!-- 获奖情况 结束 -->
+
+<!-- 个人简介 开始 -->
+<view class="signContainer">
+  <view class="infoItem">
+    <text class="item-label">个人简介</text>
+    <view class="item-nav">
+      <textarea maxlength="-1" name='userIntroduction' placeholder="请写下个人简介"></textarea>
+    </view>
+  </view>
+</view>
+<!-- 个人简介 结束 -->
+
+<!-- 提交按钮 开始 -->
+<button class="personBtn" formType="submit">提交报名</button>
+<!-- 提交按钮 结束 --> 
+</form>
+

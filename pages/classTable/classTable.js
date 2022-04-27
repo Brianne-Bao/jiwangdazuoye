@@ -10,7 +10,6 @@ Page({
     getAllCourseId: function () {
         var app = getApp();
         var username = app.globalData.username;
-        console.log(username);
         if (username == "") { //未登录，跳转到登录页面
             wx.showToast({
                 title: '请先登录',
@@ -68,7 +67,7 @@ Page({
         });
     },
 
-    onLoad: function (e) {
+    onShow: function (e) {
         this.cntCurrWeek();
         this.getAllCourseId();
     },

@@ -8,6 +8,16 @@ page {
     flex-direction: column;
     padding: 0;
     box-sizing: border-box;
+    /* color: #FA7666;
+    color:#FCB8AF;
+    color:#F39C13;
+    color:#F8C77A;
+    color:#56c7ff;
+    color: #81D2FC;
+    color:#41f541;
+    color:#78fa78;
+    color:#f151f7;
+    color:#f694fa; */
 }
 
 /*登录图片*/

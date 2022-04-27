@@ -1,66 +1,42 @@
 // pages/changeCourse/changeCourse.js
 Page({
 
-    /**
-     * 页面的初始数据
-     */
     data: {
+        op: 0 ,//0,1,2,3：未选择，新增课程，删除课程，修改课程
+        departments:getApp().globalData.departments,
+        department:"",
+        dep_index : 0,
+
 
     },
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-
+    choose_add_cs: function () {
+        this.setData({
+            "op": 1
+        });
+    },
+    choose_del_cs: function () {
+        this.setData({
+            "op": 2
+        });
+    },
+    choose_change_cs: function () {
+        this.setData({
+            "op": 3
+        })
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
+    onShow:function(){
+        this.setData({"op":0});
     },
 
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
+    dep_change:function(e){
+        this.setData({
+            "dep_index": e.detail.value
+          });
     },
 
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
 
-    },
+    
 
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    }
 })

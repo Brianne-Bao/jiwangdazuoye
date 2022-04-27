@@ -1,6 +1,6 @@
 # login
 
-**username**（即学工号）
+**username**（即stu_id/tea_id）
 
 **type**(0为学生，1为老师)
 
@@ -24,7 +24,7 @@
 
 # course
 
-**cs_id**（感觉应该用定长字符串类型，但是wx的云数据库没有这种类型）
+**cs_id**
 
 **cs_name**
 
@@ -67,3 +67,12 @@
 
 # classroom
 
+**room_name**
+
+**cs_ids**
+
+# dep_major
+
+dep_name
+
+major_name

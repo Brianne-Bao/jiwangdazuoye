@@ -1,5 +1,7 @@
 <!--index.wxml-->
 <view>
+<view>学生模拟用户账号111111,密码111111</view>
+<view>教师模拟用户账号222222,密码222222</view>
   <view class="navi">
     <navigator url="/pages/classTable/classTable">
       <image class="navi_icon" src="/images/mainPage/classTable.png" />

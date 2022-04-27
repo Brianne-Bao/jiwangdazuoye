@@ -1,2 +1,40 @@
 <!--pages/changeCourse/changeCourse.wxml-->
-<text>pages/changeCourse/changeCourse.wxml</text>
+<view class='title'>
+    <view class='choose_op' bindtap='choose_add_cs'>新增课程</view>
+    <view class='choose_op' bindtap='choose_del_cs'>删除课程</view>
+    <view class='choose_op' bindtap='choose_change_cs'>修改课程</view>
+</view>
+<!-- 新增课程 -->
+<block wx:if="{{op == 1}}">
+    <form bindsubmit="formSubmit" bindreset="formReset">
+        <view class="signContainer">
+            <view class="infoItem">
+                <text class="item-label">课程号</text>
+                <input name='cs_id' placeholder="未填写(必填)" value="{{get_cs_id}}"></input>
+            </view>
+            <view class="infoItem">
+                <text class="item-label">课程名称</text>
+                <input name='cs_id' placeholder="未填写(必填)" value="{{get_cs_id}}"></input>
+            </view>
+
+            <view class="infoItem">
+                <text class="item-label">所属院系</text>
+                <view class="item-nav">
+                    <picker name="department" bindchange="dep_change" value="{{dep_index}}" range="{{departments}}">{{departments[dep_index]}}</picker>
+                    <image mode="widthFix" style="width:30rpx;" src="/image/shot.png"></image>
+                </view>
+            </view>
+
+        </view>
+    </form>
+</block>
+
+
+
+<!-- 删除课程 -->
+<block wx:elif="{{op == 2}}">
+    shanchu
+</block>
+<!-- 修改课程 -->
+<block wx:elif="{{op == 3}}">
+</block>
