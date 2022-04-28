@@ -1,18 +1,30 @@
 // pages/changeCourse/changeCourse.js
 let gd = getApp().globalData;
 let db = wx.cloud.database();
+var utils = require('../../utils/funcs.js');
+
+
 Page({
 
     data: {
         op: 0, //0,1,2,3：未选择，新增课程，删除课程，修改课程
-        template_info: {    //write_cs_info模板需要用到的信息
-            placeholder: "未填写(必填)",
-            departments: gd.departments,
-            grades: gd.grades,
-            types: gd.cs_types,
+        template_info: { //write_cs_info模板需要用到的信息
+            cs_id: "",
+            cs_name: "",
+            week_bg: 0,
+            week_end: 0,
+            day: [],
+            oddEvenWeek: [],
+            section: [],
+            classroom: [],
+            tea_id: "",
             department: "",
             grade: "",
             type: "",
+            departments: gd.departments,
+            grades: gd.grades,
+            types: gd.cs_types,
+
             dep_index: 0,
             grade_index: 0,
             type_index: 0,
@@ -37,9 +49,32 @@ Page({
         })
     },
 
-    onShow: function () {},
-
     // 增加课程部分
+    input_cs_id: function (e) {
+        this.setData({
+            "cs_id": e.detail.value
+        });
+    },
+    input_cs_name: function (e) {
+        this.setData({
+            "cs_name": e.detail.value
+        });
+    },
+    input_week_bg: function (e) {
+        this.setData({
+            "week_bg": e.detail.value
+        });
+    },
+    input_week_bg: function (e) {
+        this.setData({
+            "week_end": e.detail.value
+        });
+    },
+
+    add_cs_time: function () {
+
+    },
+
     dep_change: function (e) {
         this.setData({
             "dep_index": e.detail.value
@@ -56,25 +91,11 @@ Page({
         });
     },
 
-    add_cs_time: function () {
 
-    },
     // 删除课程部分
     show_del_cs: function (e) {
-        var input = e.detail.value;
-        const _ = db.command;
-        var del_record = db.collection("course")
-            .where(_.or([{
-                    cs_id: input
-                },
-                {
-                    cs_name: input
-                }
-            ]));
-        console.log(del_record);
-        del_record
+        utils.getCsByCs_idname(e.detail.value)
             .get().then(res => {
-                console.log(res.data);
                 this.setData({
                     "sx_courses": res.data
                 })
@@ -82,7 +103,13 @@ Page({
     },
 
     del_cs: function (e) {
-
+        db.collection("course").
+        utils.getCsByCs_idname(e.detail.value)
+            .remove({
+                success: function (res) {
+                    console.log(res.data)
+                }
+            })
     },
 
     shanchu: function () {

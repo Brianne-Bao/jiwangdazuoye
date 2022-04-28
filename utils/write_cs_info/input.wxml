@@ -1,0 +1,6 @@
+<template name="input_temp">
+    <view class="infoItem">
+        <text class="item-label">{{xiangmu}}</text>
+        <input name='cs_id' placeholder="{{placeholder}}" bindblur="{{bindblur}}"></input>
+    </view>
+</template>

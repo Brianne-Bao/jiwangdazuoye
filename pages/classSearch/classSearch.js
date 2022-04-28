@@ -1,16 +1,18 @@
 // pages/classSearch/classSearch.js
+let gd = getApp().globalData;
+var utils = require('../../utils/funcs.js');
 Page({
     data: {
         str: {
             hello: "nice to meet you"
         },
         isSelect: [false, false, false], //三个下拉框有没有被选择
-        departments: ['历史学院', '法学院'], //院系
+        departments: gd.departments,
         majors: {
             '历史学院': ['历史学类', '历史学', '考古学'],
             '法学院': ['法学类', '法学']
         }, //专业
-        grades: ['2018', '2019', '2020', '2021'], //年级
+        grades: gd.grades, //年级
         //当前输入/选中的
         cs_idName: "",
         tea_name: "",
@@ -44,7 +46,6 @@ Page({
             "department": value,
             "isSelect[0]": false,
         })
-        console.log(this.data.majors['历史学院']);
     },
 
     select_major: function () {
@@ -75,20 +76,7 @@ Page({
 
     search: function () {
         console.log(this.data.cs_idName);
-        var db = wx.cloud.database();
-        const _ = db.command;
-        db.collection('course')
-            .where(_.or([{
-                    cs_id: {
-                        $regex: '.*' + this.data.cs_idName
-                    }
-                },
-                {
-                    cs_name: {
-                        $regex: '.*' + this.data.cs_idName
-                    }
-                }
-            ]))
+        utils.getCsByCs_idname(this.data.cs_idName)
             .where({
                 // tea_name: {$regex: '.*' + this.data.tea_name,},  
                 // major: {$regex: '.*' + this.data.major,},

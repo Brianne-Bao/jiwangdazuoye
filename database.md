@@ -46,7 +46,7 @@
 
 **tea_id**(array)
 
-**major_id**
+**major_name**
 
 **grade**
 
