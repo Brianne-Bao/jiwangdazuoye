@@ -1,6 +1,9 @@
 // pages/classSearch/classSearch.js
 Page({
     data: {
+        str: {
+            hello: "nice to meet you"
+        },
         isSelect: [false, false, false], //三个下拉框有没有被选择
         departments: ['历史学院', '法学院'], //院系
         majors: {
@@ -75,9 +78,16 @@ Page({
         var db = wx.cloud.database();
         const _ = db.command;
         db.collection('course')
-            .where(_.or([
-                    {cs_id: {$regex: '.*' + this.data.cs_idName}},
-                    {cs_name: {$regex: '.*' + this.data.cs_idName}}
+            .where(_.or([{
+                    cs_id: {
+                        $regex: '.*' + this.data.cs_idName
+                    }
+                },
+                {
+                    cs_name: {
+                        $regex: '.*' + this.data.cs_idName
+                    }
+                }
             ]))
             .where({
                 // tea_name: {$regex: '.*' + this.data.tea_name,},  

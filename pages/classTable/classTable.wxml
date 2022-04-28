@@ -1,51 +1,35 @@
 <!--pages/classTable/classTable.wxml-->
+<import src="/utils/cs_table/cs_table" />
 <view class="content">
     <!-- 选择周数部分 -->
-    <view class='title'>
-        <button size="mini" bindtap="lastWeek">{{'<'}} 上一周 </button>
-                <text>第{{curr_week}}周</text>
-                <button size="mini" bindtap="nextWeek">下一周 {{'>'}} </button>
-                <image style=' height: 100rpx;width: 100rpx;' src='/images/classTable/allcourse.jpg' bindtap="allCourse"></image>
-    </view>
+    <template is="choose_week_temp" data="{{curr_week:curr_week}}" />
+    <image style=' display: flex;height: 100rpx;width: 100rpx;' src='/images/classTable/allcourse.jpg' bindtap="allCourse"></image>
 
     <!-- 表格框架部分  -->
-    <view class="top">
-        <view class='left'>节\周</view>
-        <!-- 当天高亮显示-->
-        <view wx:for="{{['一','二','三','四','五']}}" wx:key="index" wx:for-index="i" class="top-text" style="background-color: {{i+1==weekday?'rgb(238, 198, 198)':'#EFEFF4'}}">
-            {{item}}
-        </view>
-    </view>
-    <scroll-view scroll-y="true" class="scroll" style='height:{{windowHeight-110}}px;' bindtap='clickHide'>
-        <view style="width:100%;display:flex;">
-            <view style="background-color:#EFEFF4;color:#333;">
-                <view wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12]}}" wx:key="index" class="left" style='height:50px'>
-                    {{item}}
-                </view>
-            </view>
-            <view wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12]}}" wx:key="index">
-                <view style="width:100%;    margin-top:{{(index+1)*50-0.8}}px;  position: absolute; border-bottom:1rpx solid lightgray;">
-                </view>
-            </view>
-            <!--课表主体部分-->
-            <block wx:for="{{courses}}" wx:key="index" wx:for-item="course">
-                <block wx:if="{{curr_week>=course.week_bg && curr_week<=course.week_end }}">
-                    <block wx:for="{{course.day}}" wx:key="index" wx:for-index="i" wx:for-item="day">
-                        <block wx:if="{{course.oddEvenWeek[i]==0 || (course.oddEvenWeek[i]==1 && curr_week%2==1) || (course.oddEvenWeek[i]==2 && curr_week%2==0)}}">
-                            <view class="flex-item kcb-item" bindtap="showCsInfo" style="margin-left:{{day*98}}rpx; margin-top:{{(course.section[i][0]-1)*50+2}}px;height:{{course.section[i].length*50-5}}px; background-color: {{course.type == 0?'#FCB8AF':(course.type == 1?'#F8C77A':(course.type==2?'#81D2FC':(couse.type==3?'#78fa78':'#f694fa')))}}; ">
-                                <view class="smalltext" style='-webkit-line-clamp: {{course.section[i].length == 3?"4":(course.section[i].length == 4?"6":"2")}}'>
-                                    {{course.cs_name}}
-                                </view>
-                                <view class='classRoom'>{{course.classroom[i] == ''?'--':course.classroom[i]}} </view>
-                                <view class='logo' style="background-color:{{course.type == 0?'#FA7666':(course.type == 1?'#F39C13':(course.type==2?'#56c7ff':(couse.type==3?'#41f541':'#f151f7')))}}">
-                                    {{course.type == 0?'通':(course.type == 1?'平':(course.type==2?'选':(couse.type==3?'核':'选')))}}
-                                </view>
+    <template is="table_first_row_temp" data="{{weekday:weekday,line_height:line_height}}" />
+
+
+    <view style="width:100%;display:flex;">
+        <template is="table_other_rows_temp" />
+        <!--课表主体部分-->
+        <block wx:for="{{courses}}" wx:key="index" wx:for-item="course">
+            <block wx:if="{{curr_week>=course.week_bg && curr_week<=course.week_end }}">
+                <block wx:for="{{course.day}}" wx:key="index" wx:for-index="i" wx:for-item="day">
+                    <block wx:if="{{course.oddEvenWeek[i]==0 || (course.oddEvenWeek[i]==1 && curr_week%2==1) || (course.oddEvenWeek[i]==2 && curr_week%2==0)}}">
+                        <view class="flex-item kcb-item" bindtap="showCsInfo" style="margin-left:{{day*98}}rpx; margin-top:{{(course.section[i][0]-1)*50+2}}px;height:{{course.section[i].length*50-5}}px; background-color: {{course.type == 0?'#FCB8AF':(course.type == 1?'#F8C77A':(course.type==2?'#81D2FC':(couse.type==3?'#78fa78':'#f694fa')))}}; ">
+                            <view class="smalltext" style='-webkit-line-clamp: {{course.section[i].length == 3?"4":(course.section[i].length == 4?"6":"2")}}'>
+                                {{course.cs_name}}
                             </view>
-                        </block>
+                            <view class='classRoom'>{{course.classroom[i] == ''?'--':course.classroom[i]}} </view>
+                            <view class='logo' style="background-color:{{course.type == 0?'#FA7666':(course.type == 1?'#F39C13':(course.type==2?'#56c7ff':(couse.type==3?'#41f541':'#f151f7')))}}">
+                                {{course.type == 0?'通':(course.type == 1?'平':(course.type==2?'选':(couse.type==3?'核':'选')))}}
+                            </view>
+                        </view>
                     </block>
                 </block>
             </block>
-        </view>
-    </scroll-view>
+        </block>
+    </view>
+
 
 </view>

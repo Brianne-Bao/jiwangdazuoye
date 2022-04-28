@@ -1,0 +1,9 @@
+<template name="picker_temp">
+    <view class="infoItem">
+        <text class="item-label">上课年级</text>
+        <view class="item-nav">
+            <picker name="grade" bindchange="grade_change" value="{{grade_index}}" range="{{grades}}"><text decode="true">{{grades[grade_index]}}&nbsp;&nbsp;&nbsp; ></text> </picker>
+            <text></text>
+        </view>
+    </view>
+</template>

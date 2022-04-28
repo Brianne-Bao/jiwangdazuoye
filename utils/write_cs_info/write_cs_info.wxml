@@ -1,0 +1,50 @@
+<template name="write_cs_info_temp">
+    <view class="signContainer">
+        <view class="infoItem">
+            <text class="item-label">课程号</text>
+            <input name='cs_id' placeholder="{{placeholder}}" value="{{get_cs_id}}"></input>
+        </view>
+        <view class="infoItem">
+            <text class="item-label">课程名称</text>
+            <input name='cs_id' placeholder="{{placeholder}}" value="{{get_cs_id}}"></input>
+        </view>
+        <view class="infoItem">
+            <text class="item-label">起止周数</text>
+            <input name='cs_id' placeholder="{{placeholder}}" value="{{get_cs_id}}"></input>-
+            <input name='cs_id' placeholder="{{placeholder}}" value="{{get_cs_id}}"></input>
+        </view>
+
+        <view class="infoItem">
+            <text class="item-label">上课时间</text>
+            <text class='iconfont icon-tianjia' bindtap="add_cs_time"></text>
+        </view>
+
+        <view class="infoItem">
+            <text class="item-label">所属院系</text>
+            <view class="item-nav">
+                <picker name="department" bindchange="dep_change" value="{{dep_index}}" range="{{departments}}"><text decode="true">{{departments[dep_index]}}&nbsp;&nbsp;&nbsp; ></text> </picker>
+                <text></text>
+            </view>
+        </view>
+
+        <import src="./picker.wxml" />
+        <template is="picker_temp" data="{{sx_courses:sx_courses}}" />
+        <!-- <view class="infoItem">
+            <text class="item-label">上课年级</text>
+            <view class="item-nav">
+                <picker name="grade" bindchange="grade_change" value="{{grade_index}}" range="{{grades}}"><text decode="true">{{grades[grade_index]}}&nbsp;&nbsp;&nbsp; ></text> </picker>
+                <text></text>
+            </view>
+        </view>
+        <view class="infoItem">
+            <text class="item-label">课程类型</text>
+            <view class="item-nav">
+                <picker name="type" bindchange="type_change" value="{{type_index}}" range="{{types}}"><text decode="true">{{types[type_index]}}&nbsp;&nbsp;&nbsp; ></text> </picker>
+                <text></text>
+            </view>
+        </view> -->
+
+        <!-- 提交按钮 -->
+        <button class='myBtn' formType="submit" bindtap="tijiao">提交</button>
+    </view>
+</template>

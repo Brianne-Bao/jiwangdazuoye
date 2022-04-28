@@ -1,4 +1,5 @@
 <!--pages/changeCourse/changeCourse.wxml-->
+
 <view class='title'>
     <view class='choose_op' bindtap='choose_add_cs'>
         <text class='iconfont icon-tianjia'></text>新增课程
@@ -6,80 +7,30 @@
     <view class='choose_op' bindtap='choose_del_cs'>
         <text class='iconfont icon-shanchu'></text>删除课程
     </view>
-    <view class='choose_op' bindtap='choose_change_cs'>
+    <view class='choose_op' bindtap='choose_change_cs' style="margin-bottom: 50rpx;">
         <text class='iconfont icon-edit'></text>修改课程
     </view>
 </view>
 <!-- 新增课程 -->
+<import src="/utils/write_cs_info/write_cs_info.wxml" />
 <block wx:if="{{op == 1}}">
     <form bindsubmit="formSubmit" bindreset="formReset">
-        <view class="signContainer">
-            <view class="infoItem">
-                <text class="item-label">课程号</text>
-                <input name='cs_id' placeholder="未填写(必填)" value="{{get_cs_id}}"></input>
-            </view>
-            <view class="infoItem">
-                <text class="item-label">课程名称</text>
-                <input name='cs_id' placeholder="未填写(必填)" value="{{get_cs_id}}"></input>
-            </view>
-            <view class="infoItem">
-                <text class="item-label">起止周数</text>
-                <input name='cs_id' placeholder="未填写(必填)" value="{{get_cs_id}}"></input>-
-                <input name='cs_id' placeholder="未填写(必填)" value="{{get_cs_id}}"></input>
-            </view>
-            <view class="infoItem">
-                <text class="item-label">起止周数</text>
-                <input name='cs_id' placeholder="未填写(必填)" value="{{get_cs_id}}"></input>-
-
-            </view>
-
-
-            <view class="infoItem">
-                <text class="item-label">上课时间</text>
-                <text class='iconfont icon-tianjia' bindtap="add_cs_time"></text>
-            </view>
-
-            <view class="infoItem">
-                <text class="item-label">所属院系</text>
-                <view class="item-nav">
-                    <picker name="department" bindchange="dep_change" value="{{dep_index}}" range="{{departments}}"><text decode="true">{{departments[dep_index]}}&nbsp;&nbsp;&nbsp; ></text> </picker>
-                    <text></text>
-                </view>
-            </view>
-
-            <view class="infoItem">
-                <text class="item-label">上课年级</text>
-                <view class="item-nav">
-                    <picker name="grade" bindchange="grade_change" value="{{grade_index}}" range="{{grades}}"><text decode="true">{{grades[grade_index]}}&nbsp;&nbsp;&nbsp; ></text> </picker>
-                    <text></text>
-                </view>
-            </view>
-            <view class="infoItem">
-                <text class="item-label">课程类型</text>
-                <view class="item-nav">
-                    <picker name="type" bindchange="type_change" value="{{type_index}}" range="{{types}}"><text decode="true">{{types[type_index]}}&nbsp;&nbsp;&nbsp; ></text> </picker>
-                    <text></text>
-                </view>
-            </view>
-
-            <!-- 提交按钮 -->
-            <button class='myBtn' formType="submit" bindtap="tijiao">提交</button>
-        </view>
+        <template is="write_cs_info_temp" data="{{...template_info}}" />
     </form>
 </block>
-
-
 
 <!-- 删除课程 -->
 <block wx:elif="{{op == 2}}">
     <view>
-        <mp-searchbar placeholder="输入课程号/课程名"  bindinput="show_del_cs" search="{{search}}"></mp-searchbar>
-    
+        <mp-searchbar placeholder="输入课程号/课程名" bindinput="show_del_cs" search="{{search}}"></mp-searchbar>
+        <import src="/utils/show_cs_info/show_cs_info.wxml" />
+        <template is="cs_info_temp" data="{{sx_courses:sx_courses}}" />
     </view>
 
     <button class='myBtn' formType="submit" bindtap="shanchu">删除</button>
 </block>
 <!-- 修改课程 -->
 <block wx:elif="{{op == 3}}">
-
+<mp-searchbar placeholder="输入课程号/课程名" bindinput="show_del_cs" search="{{search}}"></mp-searchbar>
+    <template is="write_cs_info_temp" data="{{...template_info}}" />
 </block>

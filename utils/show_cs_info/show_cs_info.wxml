@@ -1,8 +1,3 @@
-<template name='test'>
-test template
-<view wx:for="{{grades}}">{{item}}</view>
-</template>
-
 <template name="cs_info_temp">
     <view class="divLine"></view>
     <view class="show_data_tab">

@@ -5,17 +5,21 @@ Page({
 
     data: {
         op: 0, //0,1,2,3：未选择，新增课程，删除课程，修改课程
-        departments: gd.departments,
-        grades: gd.grades,
-        types: gd.cs_types,
-        department: "",
-        grade: "",
-        type: "",
-        dep_index: 0,
-        grade_index: 0,
-        type_index: 0,
+        template_info: {    //write_cs_info模板需要用到的信息
+            placeholder: "未填写(必填)",
+            departments: gd.departments,
+            grades: gd.grades,
+            types: gd.cs_types,
+            department: "",
+            grade: "",
+            type: "",
+            dep_index: 0,
+            grade_index: 0,
+            type_index: 0,
+        },
+        sx_courses: [], //符合筛选条件的课程信息
     },
-
+    //操作按钮部分
     choose_add_cs: function () {
         this.setData({
             "op": 1
@@ -35,6 +39,7 @@ Page({
 
     onShow: function () {},
 
+    // 增加课程部分
     dep_change: function (e) {
         this.setData({
             "dep_index": e.detail.value
@@ -54,6 +59,7 @@ Page({
     add_cs_time: function () {
 
     },
+    // 删除课程部分
     show_del_cs: function (e) {
         var input = e.detail.value;
         const _ = db.command;
@@ -74,9 +80,11 @@ Page({
                 })
             })
     },
+
     del_cs: function (e) {
 
     },
+
     shanchu: function () {
         wx.showModal({
             title: '提示',
