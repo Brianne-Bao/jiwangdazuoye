@@ -2,8 +2,7 @@
     <view class="infoItem">
         <text class="item-label">{{xiangmu}}</text>
         <view class="item-nav">
-            <picker name="{{array}}" bindchange="{{bindchange}}" value="{{index}}" range="{{array}}"><text decode="true">{{array[index]}}&nbsp;&nbsp;&nbsp; ></text> </picker>
-            <text></text>
+            <picker name="{{name}}" bindchange="{{bindchange}}" value="{{array[index]}}" range="{{array}}"><text decode="true">{{array[index]}}&nbsp;&nbsp;&nbsp; ></text> </picker>
         </view>
     </view>
 </template>

@@ -3,11 +3,13 @@ App({
     globalData: {
         username: "",
         usertype: 0,
-        departments: ['历史学院', '法学院', '软件学院'],
+        departments: ['软件学院','历史学院', '法学院', ],
         grades: ['2018', '2019', '2020', '2021'],
         cs_types: ['通修', '平台', '通识', '核心', '选修'],
         weekday: 0, //今天是星期几
         curr_week: 0, //今天是开学第几周
+        buildings:['仙I','仙II','逸A','逸B','逸C','基础实验楼甲区','基础实验楼乙区','基础实验楼丙区'],
+        
     },
 
     cntCurrWeek: function () {

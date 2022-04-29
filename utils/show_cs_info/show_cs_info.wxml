@@ -1,6 +1,6 @@
 <template name="cs_info_temp">
     <view class="divLine"></view>
-    <view class="show_data_tab">
+    <view class="show_data_tab" bindtap="choose_cs">
         <block wx:for="{{sx_courses}}" wx:key="index" wx:for-item="course">
             <text class="cs_id">{{course.cs_id}}\n</text>
             <text class="cs_name">{{course.cs_name}}\n</text>
@@ -12,5 +12,6 @@
             <text class="xiangmu">授课教师：</text>{{course.tea_id}}
             <view class="divLine"></view>
         </block>
+        <radio></radio>
     </view>
 </template>

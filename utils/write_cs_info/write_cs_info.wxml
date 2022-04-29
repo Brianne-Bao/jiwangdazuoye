@@ -1,34 +1,64 @@
+<import src="./input.wxml" />
+<import src="./picker.wxml" />
 <template name="write_cs_info_temp">
     <view class="signContainer">
-        <import src="./input.wxml" />
-        <template is="input_temp" data="{{xiangmu:'课程号',placeholder:'未填写（必填）',bindblur:'input_cs_id'}}" />
-        <template is="input_temp" data="{{xiangmu:'课程名称',placeholder:'未填写（必填）',bindblur:'input_cs_name'}}" />
+        <template is="input_temp" data="{{xiangmu:'课程号',name:'cs_id', placeholder:'未填写（必填）'}}" />
+        <template is="input_temp" data="{{xiangmu:'课程名称',name:'cs_name',placeholder:'未填写（必填）'}}" />
 
         <view class="infoItem">
             <text class="item-label">起止周数</text>
-            <input placeholder="请输入1-17的数字" placeholder-style="font-size:30rpx" bindblur="input_week_bg"></input>-
-            <input placeholder="请输入1-17的数字" placeholder-style="font-size:30rpx" bindblur="input_week_end"></input>
+            <template is="two_input_temp" data="{{name1:'week_bg', name2:'week_end',end:17,danwei:'周'}}" />
         </view>
 
         <view class="infoItem">
             <text class="item-label">上课时间及地点</text>
-            <text class='iconfont icon-tianjia' bindtap="add_cs_time"></text>
+            <view style="display: flex; flex-direction: column;">
+                <block wx:for="{{time_loc}}" wx:key="index" wx:for-index="i">
+                    <!-- 时间 -->
+                    <picker mode="multiSelector" bindchange="time_change" data-index="{{i}}" value="{{time_loc[i].time_index}}" range="{{time_array}}">
+                        时间：{{time_array[0][time_loc[i].time_index[0]]}}，{{time_array[1][time_loc[i].time_index[1]]}}<text decode="true">&nbsp;&nbsp;&nbsp; ></text>
+                    </picker>
+                    <view style="display: flex;">
+                        <template is="two_input_temp" data="{{end:12,danwei:'节', bindblur1:input_section_bg, bindblur2:input_section_end, data_index:i}}" />
+                    </view>
+                    <!-- 地点 -->
+                    <picker bindchange="build_change" data-index="{{i}}" value="{{time_loc[i].building_index}}" range="{{buildings}}">
+                        <text decode="true">地点：{{buildings[time_loc[i].building_index]}}&nbsp; ></text>
+                    </picker>
+                    <input bindblur="input_classroom" placeholder="请输入教室号，如101" data-index="{{i}}"></input>
+                    <!-- 删除 -->
+                    <text class='iconfont icon-shanchu' bindtap="del_cs_time" data-index="{{i}}" style="text-align: end;"></text>
+                </block>
+                <!-- "添加" -->
+                <text class='iconfont icon-tianjia' bindtap="add_cs_time">添加</text>
+            </view>
         </view>
 
         <view class="infoItem">
             <text class="item-label">所属院系</text>
             <view class="item-nav">
-                <picker name="department" bindchange="dep_change" value="{{dep_index}}" range="{{departments}}"><text decode="true">{{departments[dep_index]}}&nbsp;&nbsp;&nbsp; ></text> </picker>
-                <text></text>
+                <picker name="department" bindchange="dep_change" value="{{departments[dep_index]}}" range="{{departments}}"><text decode="true">{{departments[dep_index]}}&nbsp;&nbsp;&nbsp; ></text> </picker>
             </view>
         </view>
 
-        <import src="./picker.wxml" />
-        <template is="picker_temp" data="{{xiangmu:'上课年级',bindchange:'grade_change',array:grades,index:grade_index}}" />
-        <template is="picker_temp" data="{{xiangmu:'课程类型',bindchange:'type_change',array:types,index:type_index}}" />
+        <template is="picker_temp" data="{{xiangmu:'上课年级', name:'grade',indchange:'grade_change', array:grades, index:grade_index}}" />
+        <template is="picker_temp" data="{{xiangmu:'课程类型',name:'cs_type',bindchange:'type_change', array:types, index:type_index}}" />
+
+        <view class="infoItem">
+            <text class="item-label">授课教师</text>
+            <view style="display: flex; flex-direction: column;">
+                <block wx:for="{{teachers}}" wx:for-item="tea" wx:key="index" wx:for-index="i">
+                    <view>{{tea.tea_id}} {{tea.tea_name}}</view>
+                </block>
+                <mp-searchbar placeholder="输入教师姓名/工号" bindinput="search_tea" ></mp-searchbar>
+                <block wx:for="{{sx_teachers}}" wx:for-item="tea" wx:key="index" wx:for-index="i">
+                    <view bindtap="choose_tea" style="background-color: rgb(234, 235, 236);font-weight:200; border-bottom: thin solid gray;" data-index="{{i}}">{{tea.tea_id}} {{tea.tea_name}}</view>
+                </block>
+            </view>
+        </view>
 
 
         <!-- 提交按钮 -->
-        <button class='myBtn' formType="submit" bindtap="tijiao">提交</button>
+        <button class='myBtn' formType="submit">提交</button>
     </view>
 </template>
