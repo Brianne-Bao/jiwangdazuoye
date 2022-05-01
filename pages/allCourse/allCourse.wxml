@@ -3,15 +3,6 @@
     <view class="divLine"></view>
 </view>
 <view class="content">
-    <block wx:for="{{courses}}" wx:key="index" wx:for-item="course">
-        <text class="cs_id">{{course.cs_id}}\n</text>
-        <text class="cs_name">{{course.cs_name}}\n</text>
-        <text class="xiangmu">时间地点:</text>
-        <view wx:for="{{course.day}}" wx:key="index" wx:for-index="i" wx:for-item="day">
-            星期{{day}} 第{{course.section[i][0]}}-{{course.section[i][course.section[i].length-1]}}节 {{course.classroom[i]}}
-        </view>
-        <text>{{course.week_bg}}-{{course.week_end}}周\n</text>
-        <text class="xiangmu">授课教师：</text>{{course.tea_id}}
-        <view class="divLine"></view>
-    </block>
+    <import src="/utils/show_cs_info/show_cs_info.wxml" />
+    <template is="cs_info_temp" data="{{sx_courses:courses, show_checkbox:false}}" />
 </view>

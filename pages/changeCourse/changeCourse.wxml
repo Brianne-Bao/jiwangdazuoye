@@ -1,4 +1,6 @@
 <!--pages/changeCourse/changeCourse.wxml-->
+<import src="/utils/write_cs_info/write_cs_info.wxml" />
+<import src="/utils/show_cs_info/show_cs_info.wxml" />
 
 <view class='title'>
     <view class='choose_op' bindtap='choose_add_cs'>
@@ -12,7 +14,6 @@
     </view>
 </view>
 <!-- 新增课程 -->
-<import src="/utils/write_cs_info/write_cs_info.wxml" />
 <block wx:if="{{op == 1}}">
     <form bindsubmit="formSubmit" bindreset="formReset">
         <template is="write_cs_info_temp" data="{{...template_info}}" />
@@ -22,15 +23,21 @@
 <!-- 删除课程 -->
 <block wx:elif="{{op == 2}}">
     <view>
-        <mp-searchbar placeholder="输入课程号/课程名" bindinput="show_del_cs" search="{{search}}"></mp-searchbar>
-        <import src="/utils/show_cs_info/show_cs_info.wxml" />
-        <template is="cs_info_temp" data="{{sx_courses:sx_courses}}" />
+        <mp-searchbar placeholder="输入课程号/课程名" bindinput="show_sx_cs" search="{{search}}"></mp-searchbar>
+        <template is="show_cs_info_temp" data="{{sx_courses:sx_courses, show_checkbox:true}}" />
     </view>
-
     <button class='myBtn' formType="submit" bindtap="shanchu">删除</button>
 </block>
+
 <!-- 修改课程 -->
 <block wx:elif="{{op == 3}}">
-    <mp-searchbar placeholder="输入课程号/课程名" bindinput="show_del_cs" search="{{search}}"></mp-searchbar>
-    <template is="write_cs_info_temp" data="{{...template_info}}" />
+    <mp-searchbar placeholder="输入课程号/课程名" bindinput="show_sx_cs" search="{{search}}"></mp-searchbar>
+    <block wx:if="{{!show_edit_ui}}">
+    <template is="show_cs_info_temp" data="{{sx_courses:sx_courses, show_edit_icon:true}}" />
+    </block>
+    
+    <block wx:else>
+        <template is="write_cs_info_temp" data="{{...template_info}}" />
+    </block>
+
 </block>

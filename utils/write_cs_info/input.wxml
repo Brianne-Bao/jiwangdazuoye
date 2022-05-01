@@ -1,12 +1,12 @@
 <template name="input_temp">
     <view class="infoItem">
         <text class="item-label">{{xiangmu}}</text>
-        <input name='{{name}}' placeholder="{{placeholder}}" bindblur="{{bindblur}}"></input>
+        <input name='{{name}}' placeholder="{{placeholder}}" bindblur="{{bindblur}}" value="{{value}}"></input>
     </view>
 </template>
 
 <template name="two_input_temp">
-    <input name='{{name1}}' style="width: 50rpx;" placeholder="1" bindblur="{{bindblur1}}" data-index="{{data_index}}"></input>-
-    <input name='{{name2}}' style="width: 50rpx;" placeholder="{{end}}" bindblur="{{bindblur2}}" data-index="{{data_index}}"></input>{{danwei}}
+    <input name='{{name1}}' style="width: 50rpx;" placeholder="1" bindblur="{{bindblur1}}" data-index="{{data_index}}" value="{{value1}}"></input>-
+    <input name='{{name2}}' style="width: 50rpx;" placeholder="{{end}}" bindblur="{{bindblur2}}" data-index="{{data_index}}" value="{{value1}}"></input>{{danwei}}
     <text style="font-size: 30rpx;color:gray;" decode="true">&nbsp;(请输入1-{{end}}中的数字)</text>
 </template>

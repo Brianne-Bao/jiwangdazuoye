@@ -32,8 +32,12 @@ Page({
             type_index: 0,
             sx_teachers: [], //筛选出的teacher
             teachers: [], //选中的teacher
+
+            cs_id_value:"",
         },
         sx_courses: [], //符合筛选条件的课程信息
+        show_edit_ui:false,
+
     },
 
 
@@ -338,40 +342,67 @@ Page({
     },
 
     // 2. 删除课程部分
-    show_del_cs: function (e) {
+    show_sx_cs: function (e) {
+        console.log("调用show_del_cs");
         utils.getCsByCs_idname(e.detail.value)
             .get().then(res => {
                 this.setData({
                     "sx_courses": res.data
                 })
-            })
+            });
+        console.log("筛选出的课程数据");
+        console.log(this.data.sx_courses);
     },
-    choose_cs: function (e) {
-
-    },
-
-    del_cs: function (e) {
-        db.collection("course").
-        utils.getCsByCs_idname(e.detail.value)
-            .remove({
-                success: function (res) {
-                    console.log(res.data)
+    checkboxChange: function (e) {
+        console.log("复选框的值");
+        console.log(e.detail.value);
+        const values = e.detail.value;
+        var sx_courses = this.data.sx_courses;
+        sx_courses.forEach(ele => {
+            ele.checked = false;
+            for (let j = 0; j < values.length; j++)
+                if (values[j] == ele.cs_id) {
+                    ele.checked = true;
+                    break;
                 }
-            })
+        })
+        this.setData({
+            sx_courses
+        });
+        console.log(this.data.sx_courses);
     },
 
     shanchu: function () {
+        var sx_courses = this.data.sx_courses;
         wx.showModal({
             title: '提示',
-            content: '确定删除该课程？',
+            content: '确定删除这些课程？',
             success(res) {
                 if (res.confirm) {
-                    this.del_cs();
+                    sx_courses.forEach(ele => {
+                        if (ele.checked == true) {  
+                            utils.getCsByCs_idname(ele.cs_id)
+                                .remove({
+                                    success: function (res) {
+                                        console.log("被删除的课程信息");
+                                        console.log(res);
+                                    }
+                                })
+                        }
+                    })
                 }
             }
         })
     },
 
-
+    //3.编辑课程部分
+    edit_cs:function(e){
+        this.setData({"show_edit_ui":true});
+        // const index = e.currentTarget.dataset.index;
+        // var edit_cs = this.data.sx_courses[index];
+        // this.setData({
+        //     "template_info.cs_id_value": edit_cs.cs_id,
+        // });
+    }
 
 })

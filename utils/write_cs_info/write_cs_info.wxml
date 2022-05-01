@@ -2,7 +2,7 @@
 <import src="./picker.wxml" />
 <template name="write_cs_info_temp">
     <view class="signContainer">
-        <template is="input_temp" data="{{xiangmu:'课程号',name:'cs_id', placeholder:'未填写（必填）'}}" />
+        <template is="input_temp" data="{{xiangmu:'课程号',name:'cs_id', placeholder:'未填写（必填）',value:'{{cs_id_value}}' }} " />
         <template is="input_temp" data="{{xiangmu:'课程名称',name:'cs_name',placeholder:'未填写（必填）'}}" />
 
         <view class="infoItem">

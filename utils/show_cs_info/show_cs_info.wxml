@@ -1,18 +1,35 @@
-<template name="cs_info_temp">
+<template name="show_cs_info_temp">
     <view class="divLine"></view>
-    <view class="show_data_tab" bindtap="choose_cs">
-        <block wx:for="{{sx_courses}}" wx:key="index" wx:for-item="course">
-            <text class="cs_id">{{course.cs_id}}\n</text>
-            <text class="cs_name">{{course.cs_name}}\n</text>
-            <text class="xiangmu">时间地点:</text>
-            <view wx:for="{{course.day}}" wx:key="index" wx:for-index="i" wx:for-item="day">
-                星期{{day}} 第{{course.section[i][0]}}-{{course.section[i][course.section[i].length-1]}}节 {{course.classroom[i]}}
+
+    <view class="show_data_tab">
+        <checkbox-group bindchange="checkboxChange">
+            <view wx:for="{{sx_courses}}" wx:key="index" wx:for-item="course" wx:for-index="i">
+                <view style="display: flex;justify-content:space-evenly">
+                    <view>
+                        <text class="cs_id">{{course.cs_id}}\n</text>
+                        <text class="cs_name">{{course.cs_name}}\n</text>
+                        <text class="xiangmu">时间地点: </text>
+                        <block wx:for="{{course.time_loc}}" wx:for-item="tl" wx:key="index">
+                            第{{tl.section_bg}}-{{tl.section_end}}节
+                            {{tl.day}} {{tl.building}}-{{tl.classroom}}
+                            <text>\n</text>
+                        </block>
+                        <text>{{course.week_bg}}-{{course.week_end}}周\n</text>
+                        <text class="xiangmu">授课教师：</text>
+                        <block wx:for="{{course.teachers}}" wx:for-item="tea" wx:key="index">
+                            {{tea.tea_name}}
+                        </block>
+                    </view>
+                    <block wx:if="{{show_checkbox}}">
+                        <checkbox value="{{course.cs_id}}" />
+                    </block>
+                    <block wx:if="{{show_edit_icon}}">
+                        <text class='iconfont icon-edit' bindtap="edit_cs" data-index="{{i}}"></text>
+                    </block>
+                </view>
+                <view class="divLine"></view>
             </view>
-            <text>{{course.week_bg}}-{{course.week_end}}周\n</text>
-            <text class="xiangmu">授课教师：</text>{{course.tea_id}}
-            <view class="divLine"></view>
-        </block>
-        <radio></radio>
+        </checkbox-group>
     </view>
-    
+
 </template>
