@@ -19,7 +19,7 @@
                         时间：{{time_array[0][time_loc[i].time_index[0]]}}，{{time_array[1][time_loc[i].time_index[1]]}}<text decode="true">&nbsp;&nbsp;&nbsp; ></text>
                     </picker>
                     <view style="display: flex;">
-                        <template is="two_input_temp" data="{{end:12,danwei:'节', bindblur1:input_section_bg, bindblur2:input_section_end, data_index:i}}" />
+                        <template is="two_input_temp" data="{{end:12,danwei:'节', bindblur1:'input_section_bg', bindblur2:'input_section_end', data_index:i}}" />
                     </view>
                     <!-- 地点 -->
                     <picker bindchange="build_change" data-index="{{i}}" value="{{time_loc[i].building_index}}" range="{{buildings}}">
@@ -41,7 +41,7 @@
             </view>
         </view>
 
-        <template is="picker_temp" data="{{xiangmu:'上课年级', name:'grade',indchange:'grade_change', array:grades, index:grade_index}}" />
+        <template is="picker_temp" data="{{xiangmu:'上课年级', name:'grade',bindchange:'grade_change', array:grades, index:grade_index}}" />
         <template is="picker_temp" data="{{xiangmu:'课程类型',name:'cs_type',bindchange:'type_change', array:types, index:type_index}}" />
 
         <view class="infoItem">

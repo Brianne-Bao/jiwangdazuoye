@@ -30,8 +30,8 @@ Page({
             dep_index: 0,
             grade_index: 0,
             type_index: 0,
-            sx_teachers: [],
-            teachers: []
+            sx_teachers: [], //筛选出的teacher
+            teachers: [], //选中的teacher
         },
         sx_courses: [], //符合筛选条件的课程信息
     },
@@ -61,12 +61,10 @@ Page({
         let i = e.currentTarget.dataset.index;
         let time_loc = this.data.template_info.time_loc;
         time_loc.push({
-            "day": 0,
-            "oddEvenWeek": 0,
+            "time_index": [0, 0],
             "section_bg": 0,
             "section_end": 0,
             "classroom": "",
-            "time_index": [0, 0],
             "building_index": 0,
         });
         this.setData({
@@ -75,10 +73,8 @@ Page({
     },
     del_cs_time: function (e) {
         let i = e.currentTarget.dataset.index;
-        console.log(i);
         let time_loc = this.data.template_info.time_loc;
         time_loc.splice(i, 1);
-        console.log(time_loc);
         this.setData({
             "template_info.time_loc": time_loc
         });
@@ -93,7 +89,6 @@ Page({
     },
     input_section_bg: function (e) {
         let i = e.currentTarget.dataset.index;
-        console.log(i);
         let time_loc = this.data.template_info.time_loc;
         time_loc[i].section_bg = e.detail.value;
         this.setData({
@@ -144,7 +139,8 @@ Page({
     search_tea: function (e) {
         var tea_idName = e.detail.value;
         const _ = db.command;
-        db.collection("teacher").where(
+        db.collection("teacher").aggregate()
+            .match(
                 _.or([{
                         tea_id: {
                             $regex: '.*' + tea_idName
@@ -156,9 +152,16 @@ Page({
                         }
                     }
                 ]))
-            .get().then(res => {
+            .project({
+                _id: 0,
+                tea_id: 1,
+                tea_name: 1
+            })
+            .end()
+            .then(res => {
+                console.log(res.list);
                 this.setData({
-                    "template_info.sx_teachers": res.data
+                    "template_info.sx_teachers": res.list
                 })
             });
 
@@ -175,6 +178,7 @@ Page({
     },
     //1.4 数据提交
     check_valid: function (add_data) {
+        //为空检查
         var check_items = ['cs_id', 'cs_name', 'week_bg', 'week_end', 'department', 'grade', 'cs_type'],
             toast_strs = ['课程号', '课程名称', '起止周数', '起止周数', '所属院系', '上课年级', '课程类型'];
         for (let i = 0; i < check_items.length; i++) {
@@ -201,13 +205,49 @@ Page({
                     return false;
                 }
         }
+        //课程号重复检查
+        db.collection('course').where({
+            cs_id: add_data.cs_id
+        }).get().then(res => {
+            if (res.data.length != 0) {
+                wx.showToast({
+                    title: '该课程号已存在',
+                    icon: 'error',
+                    duration: 2000
+                })
+            }
+            return false;
+        })
+        //数据格式检查
+        var week_bg = add_data.week_bg,
+            week_end = add_data.week_end;
+        if (isNaN(week_bg) || isNaN(week_end) || week_bg < 1 || week_bg > 17 || week_end < 1 || week_end > 17) {
+            wx.showToast({
+                title: '起止周数请输入1-17的数字',
+                icon: 'none',
+                duration: 2000
+            })
+            return false;
+        }
+        time_loc.forEach(ele => {
+            var sec_bg = ele.section_bg,
+                sec_end = ele.section_end;
+            if (isNaN(sec_bg) || isNaN(sec_end) || sec_bg < 1 || sec_bg > 12 || sec_end < 1 || sec_end > 12) {
+                wx.showToast({
+                    title: '课程节数请输入1-12的数字',
+                    icon: 'none',
+                    duration: 2000
+                })
+                return false;
+            }
+        })
         return true;
     },
     add_course_db: function (add_data) {
+        console.log("调用add_course_db");
         db.collection('course').add({
             data: add_data,
             success: function (res) {
-                console.log(res);
                 wx.showToast({
                     title: '添加成功',
                     icon: 'success',
@@ -219,40 +259,63 @@ Page({
         });
     },
     add_classroom_db: function (add_data) {
+        console.log("调用add_classroom_db");
         const _ = db.command;
         add_data.time_loc.forEach(ele => {
-            var classroom_record = db.collection('classroom').where({
+            db.collection('classroom').where({
                 building: ele.building,
                 room: ele.classroom
-            }).get();
-            if (classroom_record.length == 0) { //该教室不存在记录
-                db.collection('classroom').add({
-                    data: {
-                        building: ele.building,
-                        room: ele.classroom,
-                        cs_ids: add_data.cs_id
-                    }
-                })
-            } else {
-                db.collection('classroom').doc(classroom_record[0]._id).update({
-                    data: {
-                        cs_ids: _.push(add_data.cs_id)
-                    }
-                })
-            }
+            }).get().then(res => {
+                console.log("查到的教室数据");
+                console.log(res.data);
+                //如果该教室不在表中，为其增加记录
+                if (res.data.length == 0) {
+                    db.collection('classroom').add({
+                        data: {
+                            building: ele.building,
+                            room: ele.classroom,
+                            cs_ids: [add_data.cs_id]
+                        }
+                    })
+                }
+                //如果该教室已经在表中，把该课程id加入该教室的cs_ids中
+                else {
+                    db.collection('classroom').doc(res.data[0]._id).update({
+                        data: {
+                            cs_ids: _.push(add_data.cs_id)
+                        }
+                    })
+                }
+            });
+
         })
     },
     add_teacher_db: function (add_data) {
-
+        console.log("调用add_teacher_db");
+        const _ = db.command;
+        //把该课程id加入该教师的cs_ids中
+        db.collection('teacher').where({
+            "tea_id": add_data.teacher
+        }).get().then(res => {
+            db.collection('teacher').doc(res.data[0]._id).update({
+                data: {
+                    cs_ids: _.push(add_data.cs_id)
+                }
+            })
+        });
     },
     formSubmit: function (e) {
-        console.log(e.detail.value);
-        console.log(this.data.template_info.time_loc);
+        //console.log(e.detail.value);
+        //console.log(this.data.template_info.time_loc);
+        console.log("调用formSubmit");
+        console.log("对数据进行修整");
         let add_data = e.detail.value;
-        var time_loc = this.data.template_info.time_loc;
+        var time_loc = JSON.parse(JSON.stringify(this.data.template_info.time_loc)); //要用深拷贝
         const time_array = this.data.template_info.time_array;
         const buildings = gd.buildings;
         time_loc.forEach(ele => {
+            ele["section_bg"] = Number(ele["section_bg"]);
+            ele["section_end"] = Number(ele["section_end"]);
             ele["day"] = time_array[0][ele.time_index[0]];
             ele["oddEvenWeek"] = time_array[1][ele.time_index[1]];
             ele["building"] = buildings[ele.building_index];
@@ -260,8 +323,12 @@ Page({
             delete ele.building_index;
         });
         add_data["time_loc"] = time_loc;
-        add_data["teachers"] = this.data.teachers;
+        add_data["teachers"] = this.data.template_info.teachers;
+        add_data["week_bg"] = Number(add_data["week_bg"]);
+        add_data["week_end"] = Number(add_data["week_end"]);
+        console.log("修整完的数据");
         console.log(add_data);
+
         // 检查数据是否合法，并在数据库中增加数据
         if (!this.check_valid(add_data))
             return;
