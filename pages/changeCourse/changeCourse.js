@@ -12,8 +12,8 @@ Page({
         template_info: { //write_cs_info模板和show_cs_info模板需要用到的信息
             time_loc: [{
                 "time_index": [0, 0],
-                "section_bg": 0,
-                "section_end": 0,
+                "section_bg": 1,
+                "section_end": 12,
                 "classroom": "",
                 "building_index": 0,
             }],
@@ -34,12 +34,12 @@ Page({
 
             cs_id_value: "",
             cs_name_value: "",
-            week_bg: 0,
-            week_end: 0,
-            show_edit_ui: false,
+            week_bg: 1,
+            week_end: 17,
+            
         },
         sx_courses: [], //符合筛选条件的课程信息
-        
+        show_edit_ui: false,
     },
 
 

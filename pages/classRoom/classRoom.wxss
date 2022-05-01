@@ -1,2 +1,3 @@
 /* pages/classRoom/classRoom.wxss */
+@import "/utils/search_tab/search_tab.wxss";
 @import "/utils/cs_table/cs_table.wxss";

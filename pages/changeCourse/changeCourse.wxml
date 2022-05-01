@@ -37,7 +37,7 @@
     </block>
     
     <block wx:else>
-        <template is="write_cs_info_temp" data="{{...template_info}}" />
+        <template is="write_cs_info_temp" data="{{...template_info,show_back_icon:true}}" />
     </block>
 
 </block>

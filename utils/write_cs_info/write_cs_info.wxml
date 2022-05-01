@@ -61,9 +61,8 @@
         <!-- 提交、（返回）按钮 -->
         <view style="display: flex;justify-content: space-evenly;">
             <button class='myBtn' formType="submit">提交</button>
+            <block wx:if="{{show_back_icon}}" >
             <button class='myBtn' bindtap="back">返回</button>
-            <block wx:if="{{show_edit_ui}}" >
-            
             </block>
         </view>
 

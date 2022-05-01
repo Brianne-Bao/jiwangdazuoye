@@ -1,0 +1,8 @@
+<template name="search_selectbox_temp">
+    <view class="selectBox">
+        <picker name="{{name}}" bindchange="{{bindchange}}" value="{{array[index]}}" range="{{array}}">
+        <text class="search_text">{{array[index]}}</text>
+        <image src="/icons/sanjiao.png" class="sanjiao" style="transform:rotateZ(180deg)"/>
+        </picker>
+    </view>
+</template>
