@@ -9,7 +9,7 @@ Page({
     data: {
         op: 0, //0,1,2,3：未选择，新增课程，删除课程，修改课程
 
-        template_info: { //write_cs_info模板需要用到的信息
+        template_info: { //write_cs_info模板和show_cs_info模板需要用到的信息
             time_loc: [{
                 "time_index": [0, 0],
                 "section_bg": 0,
@@ -20,7 +20,6 @@ Page({
             departments: gd.departments,
             grades: gd.grades,
             types: gd.cs_types,
-
             time_array: [
                 ['周一', '周二', '周三', '周四', '周五'],
                 ['每周', '单周', '双周', ],
@@ -33,11 +32,14 @@ Page({
             sx_teachers: [], //筛选出的teacher
             teachers: [], //选中的teacher
 
-            cs_id_value:"",
+            cs_id_value: "",
+            cs_name_value: "",
+            week_bg: 0,
+            week_end: 0,
+            show_edit_ui: false,
         },
         sx_courses: [], //符合筛选条件的课程信息
-        show_edit_ui:false,
-
+        
     },
 
 
@@ -380,7 +382,7 @@ Page({
             success(res) {
                 if (res.confirm) {
                     sx_courses.forEach(ele => {
-                        if (ele.checked == true) {  
+                        if (ele.checked == true) {
                             utils.getCsByCs_idname(ele.cs_id)
                                 .remove({
                                     success: function (res) {
@@ -396,13 +398,81 @@ Page({
     },
 
     //3.编辑课程部分
-    edit_cs:function(e){
-        this.setData({"show_edit_ui":true});
-        // const index = e.currentTarget.dataset.index;
-        // var edit_cs = this.data.sx_courses[index];
-        // this.setData({
-        //     "template_info.cs_id_value": edit_cs.cs_id,
-        // });
-    }
+    back:function(){
+        this.setData({
+            "show_edit_ui": false
+        });
+    },
+    edit_cs: function (e) {
+        var temp_info = this.data.template_info;
+        const index = e.currentTarget.dataset.index;
+        var edit_cs = this.data.sx_courses[index];
+        this.setData({
+            "show_edit_ui": true,
+            "template_info.cs_id_value": edit_cs.cs_id,
+            "template_info.cs_name_value": edit_cs.cs_name,
+            "template_info.week_bg": edit_cs.week_bg,
+            "template_info.week_end": edit_cs.week_end,
+            "template_info.teachers":edit_cs.teachers
+        });
+
+        var time_loc = [];
+        edit_cs.time_loc.forEach(ele => {
+            var item={};
+            for (let j = 0; j < temp_info.time_array[0].length; j++){
+                if (temp_info.time_array[0][j] == ele.day) {
+                    item.time_index=[j];
+                    break;
+                }
+            }
+            for (let j = 0; j < temp_info.time_array[1].length; j++){
+                if (temp_info.time_array[1][j] == ele.oddEvenWeek) {
+                    item.time_index.push(j);
+                    break;
+                }
+            }    
+            item.section_bg = ele.section_bg;
+            item.section_end = ele.section_end;
+            for (let j = 0; j < temp_info.buildings.length; j++){
+                if (temp_info.buildings[j] == ele.building) {
+                    item.building_index = j;
+                    break;
+                }
+            }  
+            item.classroom = ele.classroom;
+
+            time_loc.push(item);
+        })
+        this.setData({
+            "template_info.time_loc": time_loc
+        });
+
+        for (let i = 0; i < temp_info.departments.length; i++) {
+            if (temp_info.departments[i] == edit_cs.department) {
+                this.setData({
+                    "template_info.dep_index": i
+                });
+                break;
+            }
+        }
+        for (let i = 0; i < temp_info.grades.length; i++) {
+            if (temp_info.grades[i] == edit_cs.grade) {
+                this.setData({
+                    "template_info.grade_index": i
+                });
+                break;
+            }
+        }
+        for (let i = 0; i < temp_info.types.length; i++) {
+            if (temp_info.types[i] == edit_cs.type) {
+                this.setData({
+                    "template_info.type_index": i
+                });
+                break;
+            }
+        }
+
+    },
+    
 
 })

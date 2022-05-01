@@ -2,12 +2,12 @@
 <import src="./picker.wxml" />
 <template name="write_cs_info_temp">
     <view class="signContainer">
-        <template is="input_temp" data="{{xiangmu:'课程号',name:'cs_id', placeholder:'未填写（必填）',value:'{{cs_id_value}}' }} " />
-        <template is="input_temp" data="{{xiangmu:'课程名称',name:'cs_name',placeholder:'未填写（必填）'}}" />
+        <template is="input_temp" data="{{xiangmu:'课程号',name:'cs_id', placeholder:'未填写（必填',value:cs_id_value}}" />
+        <template is="input_temp" data="{{xiangmu:'课程名称',name:'cs_name',placeholder:'未填写（必填',value:cs_name_value}}" />
 
         <view class="infoItem">
             <text class="item-label">起止周数</text>
-            <template is="two_input_temp" data="{{name1:'week_bg', name2:'week_end',end:17,danwei:'周'}}" />
+            <template is="two_input_temp" data="{{name1:'week_bg', name2:'week_end',end:17,danwei:'周',value1:week_bg,value2:week_end}}" />
         </view>
 
         <view class="infoItem">
@@ -19,13 +19,13 @@
                         时间：{{time_array[0][time_loc[i].time_index[0]]}}，{{time_array[1][time_loc[i].time_index[1]]}}<text decode="true">&nbsp;&nbsp;&nbsp; ></text>
                     </picker>
                     <view style="display: flex;">
-                        <template is="two_input_temp" data="{{end:12,danwei:'节', bindblur1:'input_section_bg', bindblur2:'input_section_end', data_index:i}}" />
+                        <template is="two_input_temp" data="{{end:12,danwei:'节', bindblur1:'input_section_bg', bindblur2:'input_section_end', data_index:i,value1:time_loc[i].section_bg,value2:time_loc[i].section_end}}" />
                     </view>
                     <!-- 地点 -->
                     <picker bindchange="build_change" data-index="{{i}}" value="{{time_loc[i].building_index}}" range="{{buildings}}">
                         <text decode="true">地点：{{buildings[time_loc[i].building_index]}}&nbsp; ></text>
                     </picker>
-                    <input bindblur="input_classroom" placeholder="请输入教室号，如101" data-index="{{i}}"></input>
+                    <input bindblur="input_classroom" placeholder="请输入教室号，如101" data-index="{{i}}" value="{{time_loc[i].classroom}}"></input>
                     <!-- 删除 -->
                     <text class='iconfont icon-shanchu' bindtap="del_cs_time" data-index="{{i}}" style="text-align: end;"></text>
                 </block>
@@ -50,7 +50,7 @@
                 <block wx:for="{{teachers}}" wx:for-item="tea" wx:key="index" wx:for-index="i">
                     <view>{{tea.tea_id}} {{tea.tea_name}}</view>
                 </block>
-                <mp-searchbar placeholder="输入教师姓名/工号" bindinput="search_tea" ></mp-searchbar>
+                <mp-searchbar placeholder="输入教师姓名/工号" bindinput="search_tea"></mp-searchbar>
                 <block wx:for="{{sx_teachers}}" wx:for-item="tea" wx:key="index" wx:for-index="i">
                     <view bindtap="choose_tea" style="background-color: rgb(234, 235, 236);font-weight:200; border-bottom: thin solid gray;" data-index="{{i}}">{{tea.tea_id}} {{tea.tea_name}}</view>
                 </block>
@@ -58,7 +58,14 @@
         </view>
 
 
-        <!-- 提交按钮 -->
-        <button class='myBtn' formType="submit">提交</button>
+        <!-- 提交、（返回）按钮 -->
+        <view style="display: flex;justify-content: space-evenly;">
+            <button class='myBtn' formType="submit">提交</button>
+            <button class='myBtn' bindtap="back">返回</button>
+            <block wx:if="{{show_edit_ui}}" >
+            
+            </block>
+        </view>
+
     </view>
 </template>
