@@ -22,3 +22,47 @@ input,
     border-radius: 10rpx;
     background-color: rgb(238, 243, 248);
 }
+
+/* 下拉框 */
+.sanjiao {
+    width: 18rpx;
+    height: 10rpx;
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    transition: 0.5s;
+    /* 旋转图片过渡 */
+}
+
+.select {
+    position: absolute;
+    z-index: 10;
+    border: 2rpx solid #aaaaaa;
+    padding: 0 8rpx;
+    top: 0rpx;
+    left: 10rpx;
+    width: 300rpx;
+    overflow: auto;
+    height: 0;
+    max-height: 200rpx;
+    background-color: #fff;
+    box-sizing: border-box;
+    transition: height 0.5s;
+    /* 高度变换过渡 */
+}
+
+.select .choices {
+    color: #aaaaaa;
+    border-top: 2px solid #dadada;
+    padding: 6rpx;
+}
+
+.select :first-child {
+    border: 0;
+}
+
+/* 查询按钮 */
+.searchBtn {
+    margin-top: 7px;
+    margin-bottom: 20rpx;
+    border-radius: 10px;
+}

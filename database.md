@@ -58,8 +58,8 @@
     "week_end": 17,
     "time_loc": [
         {
-            "day": 3,
-            "oddEvenWeek": 0,
+            "day": "z",
+            "oddEvenWeek": "每周",
             "section_bg": 9,
             "section_end": 11,
             "building": "逸B",

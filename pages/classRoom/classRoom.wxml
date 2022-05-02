@@ -1,35 +1,30 @@
 <!--pages/classRoom/classRoom.wxml-->
-
+<import src="/utils/search_tab/search_tab" />
 <import src="/utils/cs_table/cs_table" />
+
+<!-- 教室查询部分 -->
+<view class="search-tab">
+    <form bindsubmit="search">
+        <template is="search_selectbox_temp" data="{{name:'building',bindchange:'build_change', array:buildings,index:build_index}}" />
+
+        <input name="clsssroom" placeholder="请输入教室号" placeholder-class="search_text" ></input>
+
+        <button class="searchBtn" formType="submit">查询</button>
+    </form>
+</view>
+
 <view class="content">
     <!-- 选择周数部分 -->
-        <template is="choose_week_temp" data="{{curr_week:curr_week}}" />
+    <template is="choose_week_temp" data="{{curr_week:curr_week}}" />
 
     <!-- 表格框架部分  -->
     <template is="table_first_row_temp" data="{{weekday:weekday}}" />
 
-
-    <scroll-view >
+    <scroll-view>
         <view style="width:100%;display:flex;">
             <template is="table_other_rows_temp" />
             <!--课表主体部分-->
-            <block wx:for="{{courses}}" wx:key="index" wx:for-item="course">
-                <block wx:if="{{curr_week>=course.week_bg && curr_week<=course.week_end }}">
-                    <block wx:for="{{course.day}}" wx:key="index" wx:for-index="i" wx:for-item="day">
-                        <block wx:if="{{course.oddEvenWeek[i]==0 || (course.oddEvenWeek[i]==1 && curr_week%2==1) || (course.oddEvenWeek[i]==2 && curr_week%2==0)}}">
-                            <view class="flex-item kcb-item" bindtap="showCsInfo" style="margin-left:{{day*98}}rpx; margin-top:{{(course.section[i][0]-1)*50+2}}px;height:{{course.section[i].length*50-5}}px; background-color: {{course.type == 0?'#FCB8AF':(course.type == 1?'#F8C77A':(course.type==2?'#81D2FC':(couse.type==3?'#78fa78':'#f694fa')))}}; ">
-                                <view class="smalltext" style='-webkit-line-clamp: {{course.section[i].length == 3?"4":(course.section[i].length == 4?"6":"2")}}'>
-                                    {{course.cs_name}}
-                                </view>
-                                <view class='classRoom'>{{course.classroom[i] == ''?'--':course.classroom[i]}} </view>
-                                <view class='logo' style="background-color:{{course.type == 0?'#FA7666':(course.type == 1?'#F39C13':(course.type==2?'#56c7ff':(couse.type==3?'#41f541':'#f151f7')))}}">
-                                    {{course.type == 0?'通':(course.type == 1?'平':(course.type==2?'选':(couse.type==3?'核':'选')))}}
-                                </view>
-                            </view>
-                        </block>
-                    </block>
-                </block>
-            </block>
+            <template is="main_body_temp" data="{{courses:courses}}" />
         </view>
     </scroll-view>
 

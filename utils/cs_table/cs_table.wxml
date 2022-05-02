@@ -1,29 +1,65 @@
-<!-- 选择周数框架 -->
-<template name="choose_week_temp">
-    <button size="mini" bindtap="lastWeek">{{'<'}} 上一周 </button>
-            <text>第{{curr_week}}周</text>
-            <button size="mini" bindtap="nextWeek">下一周 {{'>'}} </button>
-            <!-- <image style=' height: 100rpx;width: 100rpx;' src='/images/classTable/allcourse.jpg' bindtap="allCourse"></image> -->
-</template>
+<!-- 课表框架 -->
+<template name="cs_table_temp">
+    <!-- 选择周数部分 -->
+    <view style="display: flex; justify-content: space-evenly;">
+        <button size="mini" bindtap="lastWeek">{{'<'}} 上一周 </button>
+                <text>第{{curr_week}}周</text>
+                <button size="mini" bindtap="nextWeek">下一周 {{'>'}} </button>
+                <block wx:if="{{show_all_cs_image}}">
+                    <image style=' height: 100rpx;width: 100rpx;' src='/images/classTable/allcourse.jpg' bindtap="allCourse"></image>
+                </block>
+    </view>
 
-<template name="table_first_row_temp">
-    <view class="top">
+    <!-- 表格第一行 -->
+    <view class="top" style="height: {{line_height}};">
         <view class='left'>节\周</view>
         <!-- 当天高亮显示-->
         <view wx:for="{{['一','二','三','四','五']}}" wx:key="index" wx:for-index="i" class="top-text" style="background-color: {{i+1==weekday?'rgb(238, 198, 198)':'#EFEFF4'}}">
             {{item}}
         </view>
     </view>
-</template>
 
-<template name="table_other_rows_temp">
-    <view style="background-color:#EFEFF4;color:#333;">
-        <view wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12]}}" wx:key="index" class="left" style='height:50px'>
-            {{item}}
+    <view style="width:100%;display:flex;">
+        <!-- 左边字 -->
+        <view style="background-color:#EFEFF4;color:#333;">
+            <view wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12]}}" wx:key="index" class="left" style='height:{{line_height}}px'>
+                {{item}}
+            </view>
         </view>
-    </view>
-    <view wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12]}}" wx:key="index">
-        <view style="width:100%;    margin-top:{{(index+1)*50-0.8}}px;  position: absolute; border-bottom:1rpx solid lightgray;">
+        <!-- 线 -->
+        <view wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12]}}" wx:key="index">
+            <view style="width:100%;    margin-top:{{(index+1)*line_height-0.8}}px;  position: absolute; border-bottom:1rpx solid lightgray;">
+            </view>
         </view>
+        <!-- 主体 -->
+        <block wx:for="{{courses}}" wx:key="index" wx:for-item="course" wx:for-index="index">
+            <block wx:if="{{curr_week>=course.week_bg && curr_week<=course.week_end}}">
+                
+                <block wx:for="{{course.time_loc}}" wx:key="index" wx:for-index="i" wx:for-item="time_loc">
+                    <block wx:if="{{time_loc.oddEvenWeek=='每周'|| (time_loc.oddEvenWeek=='单周' && curr_week%2==1) || (time_loc.oddEvenWeek=='双周' && curr_week%2==0)}}">
+
+                        <!-- 色块 -->
+                        <view class="flex-item kcb-item" bindtap="showCsInfo" style="left:{{int_weekday[time_loc.day]*col_width}}rpx; margin-top:{{(time_loc.section_bg-1)*line_height}}px;height:{{(time_loc.section_end-time_loc.section_bg+1)*line_height}}px; width:{{col_width}};background-color: {{cs_color[index%cs_color.length]}};">
+
+                            <!-- 课程名 -->
+                             <view class="smalltext" style='-webkit-line-clamp: {{time_loc.section_end-time_loc.section_bg+1 == 3? 4:(time_loc.section_end-time_loc.section_bg+1 == 4? 6: 2)}}'> 
+                                {{course.cs_name}}
+                            </view>
+                            <!-- 教室和cs_type Logo -->
+                            <block wx:if="stu_classTable">
+                                <view class='classRoom'>{{time_loc.building}}-{{time_loc.classroom}} </view>
+
+                                <view class='logo' style="background-color:{{logo_color[index%logo_color.length]}}">
+                                    {{logo_word[course.cs_type]}}
+                                </view>
+                            </block>
+
+                        </view>
+
+                    </block>
+                </block>
+            </block>
+        </block>
     </view>
+
 </template>

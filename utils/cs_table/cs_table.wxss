@@ -24,8 +24,7 @@ button {
 /* 表格框架部分 */
 .top {
     display: flex;
-    height: 50px;
-    flex-direction: row;
+    justify-content: space-evenly;
     color: #333;
     background-color: #EFEFF4;
 }

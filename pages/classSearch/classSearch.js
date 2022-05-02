@@ -3,7 +3,6 @@ const gd = getApp().globalData;
 const db = wx.cloud.database();
 var utils = require('../../utils/funcs.js');
 
-console.log(JSON.parse(JSON.stringify(gd.departments)).unshift("buxuan"))
 Page({
     data: {
 

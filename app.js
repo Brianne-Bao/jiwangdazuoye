@@ -1,15 +1,15 @@
 // app.js
 App({
     globalData: {
-        username: "",
+        username: "111111",
         usertype: 0,
-        departments: ['历史学院', '软件学院','法学院', ],
+        departments: ['历史学院', '软件学院', '法学院', ],
         grades: ['2018', '2019', '2020', '2021'],
         cs_types: ['通修', '平台', '通识', '核心', '选修'],
         weekday: 0, //今天是星期几
         curr_week: 0, //今天是开学第几周
-        buildings:['仙I','仙II','逸A','逸B','逸C','基础实验楼甲区','基础实验楼乙区','基础实验楼丙区'],
-        
+        buildings: ['仙I', '仙II', '逸A', '逸B', '逸C', '基础实验楼甲区', '基础实验楼乙区', '基础实验楼丙区'],
+
     },
 
     cntCurrWeek: function () {
@@ -17,12 +17,14 @@ App({
         var today = new Date();
         var daysDiff = Math.ceil((today - termBeginData) / (1000 * 60 * 60 * 24));
         var weekDiff = Math.ceil(daysDiff / 7);
-        this.globalData.weekday=today.getDay();
+        this.globalData.weekday = today.getDay();
         this.globalData.curr_week = weekDiff;
     },
 
     onLaunch: function () {
-        wx.cloud.init({});
+        wx.cloud.init({
+            env: "cloud-0gi7vbl8c67ed02f"
+        });
         this.cntCurrWeek();
     }
 })
