@@ -12,7 +12,7 @@ Page({
             weekday: gd.weekday, //今天是星期几
             line_height: 50, //课程表每行的高度
             col_width:130,
-            courses: ["ams"], //该学生的所有课程信息
+            courses: [], //该学生的所有课程信息
             int_weekday: {
                 "周一": 1,
                 "周二": 2,
@@ -60,17 +60,11 @@ Page({
         //     })
         // }
         var courses = [];
-        wx.showToast({
-            title: '',
-            icon: "loading"
-        })
         var res = await db.collection('student')
             .where({
                 stu_id: username
             })
             .get();
-        console.log("res1");
-        console.log(res.data[0]);
         var all_course_id = res.data[0].cs_ids; //当前学生用户的所有课程号
 
 
@@ -88,15 +82,18 @@ Page({
         });
         console.log("当前用户的全部课程信息");
         console.log(this.data.template_info.courses);
-        wx.setStorageSync('courses', this.data.template_info.courses); //把当前用户的课程信息同步到缓存里
+        
     },
 
     onShow: function (e) {
         this.getAllCourseId();
     },
+    onLoad:function(e){wx.showToast({
+        title: '',
+        icon: "loading"
+    })},
 
     lastWeek: function (e) {
-        console.log(this.data.template_info.courses);
         this.setData({
             "template_info.curr_week": this.data.template_info.curr_week - 1
         });
@@ -108,9 +105,10 @@ Page({
     },
 
     allCourse: function (e) {
+        var courses=JSON.stringify(this.data.template_info.courses);
         wx.navigateTo({
-            url: "/pages/allCourse/allCourse"
-        })
+            url: '/pages/allCourse/allCourse?courses=' + courses
+        })//把courses数据也传过去
     },
 
     showCsInfo: function () {

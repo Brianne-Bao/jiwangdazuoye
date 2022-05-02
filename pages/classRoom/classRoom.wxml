@@ -13,19 +13,7 @@
     </form>
 </view>
 
-<view class="content">
-    <!-- 选择周数部分 -->
-    <template is="choose_week_temp" data="{{curr_week:curr_week}}" />
+    <!-- 课表部分 -->
+    <template is="cs_table_temp" data="{{...template_info}}"/>
 
-    <!-- 表格框架部分  -->
-    <template is="table_first_row_temp" data="{{weekday:weekday}}" />
 
-    <scroll-view>
-        <view style="width:100%;display:flex;">
-            <template is="table_other_rows_temp" />
-            <!--课表主体部分-->
-            <template is="main_body_temp" data="{{courses:courses}}" />
-        </view>
-    </scroll-view>
-
-</view>

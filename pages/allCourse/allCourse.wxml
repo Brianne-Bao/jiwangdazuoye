@@ -1,8 +1,6 @@
 <!--pages/allCourse/allCourse.wxml-->
-<view>
-    <view class="divLine"></view>
-</view>
+
 <view class="content">
     <import src="/utils/show_cs_info/show_cs_info.wxml" />
-    <template is="cs_info_temp" data="{{sx_courses:courses, show_checkbox:false}}" />
+    <template is="show_cs_info_temp" data="{{sx_courses:courses}}" />
 </view>

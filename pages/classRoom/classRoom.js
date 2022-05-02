@@ -4,9 +4,14 @@ const db = wx.cloud.database();
 Page({
 
     data: {
-        curr_week: gd.curr_week, //今天是开学第几周
-        weekday: gd.weekday, //今天是星期几
-        courses: [], //该教室的所有课程信息
+        template_info: {
+            curr_week: gd.curr_week, //今天是开学第几周
+            weekday: gd.weekday, //今天是星期几
+            courses: [], //该教室的所有课程信息
+            line_height: 30,
+            col_width: 120
+        },
+
         buildings: gd.buildings,
         build_index: 0
 
@@ -23,20 +28,42 @@ Page({
             build_index: e.detail.value
         })
     },
-    search: function (e) {
+
+    async search(e) {
         var condi = e.detail.value;
         if (condi.building == "全部") condi.building = "";
         console.log("课程筛选的输入条件");
         console.log(condi);
-        db.collection('classroom').where({
+        var res = await db.collection('classroom').where({
             building: condi.building,
             room: condi.classroom
-        }).get().then(res => {
-            console.log(res.data[0]);
-            this.setData({
-                "courses": res.data[0].cs_ids
-            })
-        })
-    }
+        }).get();
+        var all_course_id = res.data[0].cs_ids;
+        for (let i = 0; i < all_course_id.length; i++) {
+            res = await db.collection('course')
+                .where({
+                    cs_id: all_course_id[i]
+                }).get();
+            if (res.data.length != 0) {
+                courses.push(res.data[0]);
+            }
+        };
+        this.setData({
+            "template_info.courses": courses
+        });
+        console.log("该教室的全部课程信息");
+        console.log(this.data.template_info.courses);
+    },
+
+    lastWeek: function (e) {
+        this.setData({
+            "template_info.curr_week": this.data.template_info.curr_week - 1
+        });
+    },
+    nextWeek: function (e) {
+        this.setData({
+            "template_info.curr_week": this.data.template_info.curr_week + 1
+        });
+    },
 
 })
