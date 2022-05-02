@@ -9,7 +9,12 @@ Page({
             weekday: gd.weekday, //今天是星期几
             courses: [], //该教室的所有课程信息
             line_height: 30,
-            col_width: 120
+            col_width: 120,
+            int_weekday: gd.int_weekday,
+            cs_color: gd.cs_color,
+            logo_color:gd.logo_color,
+            logo_word: gd.logo_word
+            
         },
 
         buildings: gd.buildings,
@@ -17,6 +22,7 @@ Page({
 
     },
     onLoad: function () {
+        console.log(this.data.template_info.courses);
         var buildings = this.data.buildings;
         buildings.unshift("全部");
         this.setData({
@@ -39,6 +45,7 @@ Page({
             room: condi.classroom
         }).get();
         var all_course_id = res.data[0].cs_ids;
+        var courses = [];
         for (let i = 0; i < all_course_id.length; i++) {
             res = await db.collection('course')
                 .where({
@@ -53,6 +60,7 @@ Page({
         });
         console.log("该教室的全部课程信息");
         console.log(this.data.template_info.courses);
+        this.onLoad();
     },
 
     lastWeek: function (e) {

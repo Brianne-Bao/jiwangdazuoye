@@ -11,34 +11,12 @@ Page({
             curr_week: gd.curr_week,
             weekday: gd.weekday, //今天是星期几
             line_height: 50, //课程表每行的高度
-            col_width:130,
+            col_width: 130,
             courses: [], //该学生的所有课程信息
-            int_weekday: {
-                "周一": 1,
-                "周二": 2,
-                "周三": 3,
-                "周四": 4,
-                "周五": 5,
-            },
-            cs_color: ['#FCB8AF',
-                '#F8C77A',
-                '#81D2FC',
-                '#78fa78',
-                '#f694fa'
-            ],
-            logo_color: ['#FA7666',
-                '#F39C13',
-                '#56c7ff',
-                '#41f541',
-                '#f151f7'
-            ],
-            logo_word: {
-                "通修": '通',
-                "平台": '平',
-                "通识": '识',
-                "核心": '核',
-                "选修": '选'
-            }
+            int_weekday: gd.int_weekday,
+            cs_color: gd.cs_color,
+            logo_color:gd.logo_color,
+            logo_word: gd.logo_word
         }
 
     },
@@ -82,16 +60,18 @@ Page({
         });
         console.log("当前用户的全部课程信息");
         console.log(this.data.template_info.courses);
-        
+
     },
 
     onShow: function (e) {
         this.getAllCourseId();
     },
-    onLoad:function(e){wx.showToast({
-        title: '',
-        icon: "loading"
-    })},
+    onLoad: function (e) {
+        wx.showToast({
+            title: '',
+            icon: "loading"
+        })
+    },
 
     lastWeek: function (e) {
         this.setData({
@@ -105,10 +85,10 @@ Page({
     },
 
     allCourse: function (e) {
-        var courses=JSON.stringify(this.data.template_info.courses);
+        var courses = JSON.stringify(this.data.template_info.courses);
         wx.navigateTo({
             url: '/pages/allCourse/allCourse?courses=' + courses
-        })//把courses数据也传过去
+        }) //把courses数据也传过去
     },
 
     showCsInfo: function () {
