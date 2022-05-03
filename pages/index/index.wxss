@@ -1,14 +1,24 @@
 /**index.wxss**/
 .navi {
     display: flex;
-    justify-content: space-evenly;
+    flex-wrap: wrap;
+    /* justify-content: space-between;
+    align-content: center; */
 }
-
+.navi-item{
+    width:15%;
+    margin-left: 25%;
+    margin-top: 15%;
+    box-sizing: ：border-box;
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
+}
 .navi_icon {
-    width: 81rpx;
-    height: 81rpx;
+    width:100%;
 }
 
 .navi_label {
     font-size: 30rpx;
+    text-align: center;
 }

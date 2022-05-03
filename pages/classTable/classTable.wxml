@@ -1,4 +1,3 @@
 <!--pages/classTable/classTable.wxml-->
 <import src="/utils/cs_table/cs_table.wxml" />
-<page-meta page-style="overflow: {{showCsInfo?'hidden':'visible'}};" />
 <template is="cs_table_temp" data="{{...template_info,show_all_cs_image:true,stu_classTable: true,line_height: 50,col_width: 130}}" />

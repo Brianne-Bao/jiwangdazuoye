@@ -1,7 +1,7 @@
 <!-- 课表框架 -->
 <template name="cs_table_temp">
-   <scroll-view scroll-y="{{!showCsInfo}}">
-
+ 
+<view  style="position:{{showCsInfo?'fixed':''}}">
     <!-- 选择周数部分 -->
     <view style="display: flex; justify-content: space-evenly;">
         <button size="mini" bindtap="lastWeek">{{'<'}} 上一周 </button>
@@ -63,7 +63,7 @@
             </block>
         </block>
     </view>
-</scroll-view>
+
 
     <!-- 点击具体课程出现该课程信息的弹窗 -->
     <import src="/utils/show_cs_info/show_cs_info.wxml" />
@@ -77,6 +77,6 @@
             </view>
         </view>
     </block>
-
+</view>
 
 </template>
