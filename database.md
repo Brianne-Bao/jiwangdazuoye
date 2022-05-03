@@ -24,31 +24,7 @@
 
 # course
 
-**cs_id**
 
-**cs_name**
-
-**week_bg**(起始周数)
-
-**week_end**（结束周数）
-
-**day**(array，一周中的哪几天)，不填为自由时间
-
-**oddEvenWeek**(array,单双周，0不分单双周，1单周上课，2双周上课)
-
-**section**(array的array，占哪几节课，每项里有两个数字，分别是课的起始和结束节数) 
-
-**classroom**（array of string)，不填为自由地点
-
-​	例如day是[1，3]， oddEvenWeek是[0，1]，section是[[3，5]，[5，6]]，表明是周一的3-5节和单周周三的56节
-
-**type**:  通修、平台、通识、核心、选修
-
-**tea_id**(array)
-
-**major_name**
-
-**grade**
 
 ```js
 {
@@ -91,8 +67,3 @@
 
 
 
-# dep_major
-
-dep_name
-
-major_name

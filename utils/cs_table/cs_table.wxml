@@ -1,5 +1,7 @@
 <!-- 课表框架 -->
 <template name="cs_table_temp">
+   <scroll-view scroll-y="{{!showCsInfo}}">
+
     <!-- 选择周数部分 -->
     <view style="display: flex; justify-content: space-evenly;">
         <button size="mini" bindtap="lastWeek">{{'<'}} 上一周 </button>
@@ -39,7 +41,7 @@
                     <block wx:if="{{time_loc.oddEvenWeek=='每周'|| (time_loc.oddEvenWeek=='单周' && curr_week%2==1) || (time_loc.oddEvenWeek=='双周' && curr_week%2==0)}}">
 
                         <!-- 色块 -->
-                        <view class="flex-item kcb-item" bindtap="showCsInfo" style="left:{{int_weekday[time_loc.day]*col_width}}rpx; margin-top:{{(time_loc.section_bg-1)*line_height}}px;height:{{(time_loc.section_end-time_loc.section_bg+1)*line_height}}px; width:{{col_width}};background-color: {{cs_color[index%cs_color.length]}};">
+                        <view class="flex-item kcb-item" bindtap="clickShowCsInfo" data-course="{{course}}" style="left:{{int_weekday[time_loc.day]*col_width}}rpx; margin-top:{{(time_loc.section_bg-1)*line_height}}px;height:{{(time_loc.section_end-time_loc.section_bg+1)*line_height}}px; width:{{col_width}};background-color: {{cs_color[index%cs_color.length]}};">
 
                             <!-- 课程名 -->
                             <view class="smalltext" style='-webkit-line-clamp: {{time_loc.section_end-time_loc.section_bg+1 == 3? 4:(time_loc.section_end-time_loc.section_bg+1 == 4? 6: 2)}}'>
@@ -61,5 +63,20 @@
             </block>
         </block>
     </view>
+</scroll-view>
+
+    <!-- 点击具体课程出现该课程信息的弹窗 -->
+    <import src="/utils/show_cs_info/show_cs_info.wxml" />
+    <block wx:if="{{showCsInfo}}">
+        <view class="showModal">
+            <view class="modalMask" bindtap="closeModal">
+                <view class="modalContainer">
+                    <template is="show_cs_info_temp" data="{{sx_courses:course}}" />
+                    <button bindtap="closeModal">关闭</button>
+                </view>
+            </view>
+        </view>
+    </block>
+
 
 </template>

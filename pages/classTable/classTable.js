@@ -1,5 +1,6 @@
 // pages/classTable/classTable.js
 var utils = require('../../utils/funcs.js');
+var cs_table = require('../../utils/cs_table/cs_table.js')
 let gd = getApp().globalData;
 let db = wx.cloud.database();
 Page({
@@ -10,13 +11,13 @@ Page({
         template_info: {
             curr_week: gd.curr_week,
             weekday: gd.weekday, //今天是星期几
-            line_height: 50, //课程表每行的高度
-            col_width: 130,
             courses: [], //该学生的所有课程信息
             int_weekday: gd.int_weekday,
             cs_color: gd.cs_color,
-            logo_color:gd.logo_color,
-            logo_word: gd.logo_word
+            logo_color: gd.logo_color,
+            logo_word: gd.logo_word,
+            showCsInfo: false,
+            course: [], //点击的某个课程信息
         }
 
     },
@@ -73,15 +74,21 @@ Page({
         })
     },
 
-    lastWeek: function (e) {
+    lastWeek: function () {
+        const t = this.data.template_info.curr_week;
+    if (t > 1) {
         this.setData({
-            "template_info.curr_week": this.data.template_info.curr_week - 1
+            "template_info.curr_week": t - 1
         });
+    }
     },
-    nextWeek: function (e) {
-        this.setData({
-            "template_info.curr_week": this.data.template_info.curr_week + 1
-        });
+    nextWeek: function () {
+        const t = this.data.template_info.curr_week;
+        if (t < gd.term_week_num) {
+            this.setData({
+                "template_info.curr_week": t + 1
+            });
+        }
     },
 
     allCourse: function (e) {
@@ -91,9 +98,16 @@ Page({
         }) //把courses数据也传过去
     },
 
-    showCsInfo: function () {
-
+    clickShowCsInfo: function (e) {
+        this.setData({
+            "template_info.course": [e.currentTarget.dataset.course],
+            "template_info.showCsInfo": true
+        });
     },
-
+    closeModal: function (e) {
+        this.setData({
+            "template_info.showCsInfo": false
+        })
+    },
 
 })

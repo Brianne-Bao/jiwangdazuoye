@@ -8,8 +8,7 @@ Page({
             curr_week: gd.curr_week, //今天是开学第几周
             weekday: gd.weekday, //今天是星期几
             courses: [], //该教室的所有课程信息
-            line_height: 30,
-            col_width: 120,
+            
             int_weekday: gd.int_weekday,
             cs_color: gd.cs_color,
             logo_color:gd.logo_color,
@@ -63,15 +62,32 @@ Page({
         this.onLoad();
     },
 
-    lastWeek: function (e) {
+    lastWeek: function () {
+        const t = this.data.template_info.curr_week;
+        if (t > 1) {
+            this.setData({
+                "template_info.curr_week": t - 1
+            });
+        }
+    },
+    nextWeek: function () {
+        const t = this.data.template_info.curr_week;
+        if (t < gd.term_week_num) {
+            this.setData({
+                "template_info.curr_week": t + 1
+            });
+        }
+    },
+    clickShowCsInfo: function (e) {
         this.setData({
-            "template_info.curr_week": this.data.template_info.curr_week - 1
+            "template_info.course": [e.currentTarget.dataset.course],
+            "template_info.showCsInfo": true
         });
     },
-    nextWeek: function (e) {
+    closeModal: function (e) {
         this.setData({
-            "template_info.curr_week": this.data.template_info.curr_week + 1
-        });
+            "template_info.showCsInfo": false
+        })
     },
 
 })

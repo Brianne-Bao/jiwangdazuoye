@@ -14,6 +14,6 @@
 </view>
 
     <!-- 课表部分 -->
-    <template is="cs_table_temp" data="{{...template_info}}"/>
+    <template is="cs_table_temp" data="{{...template_info,line_height: 30,col_width: 120}}"/>
 
 
